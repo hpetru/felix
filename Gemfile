@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.0'
+
 gem 'rails', '4.2.6'
 gem 'pg'
 gem 'pry'
@@ -13,11 +15,12 @@ gem 'jbuilder', '~> 2.0'
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.4.2'
+  gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'annotate'
+  gem 'shoulda-matchers'
 end
 
 group :development do
