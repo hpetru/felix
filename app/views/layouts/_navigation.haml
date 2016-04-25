@@ -1,0 +1,9 @@
+%nav.navbar-default.navbar-static-side{role: 'navigation'}
+  .sidebar-collapse
+    %ul.nav.metismenu#side-menu
+      %li.nav-header
+        .dropdown.profile-element
+          %a.dropdown-toggle{'data-toggle': 'dropdown'}
+            %span.clear
+              .span.block.m-t-xs
+                %strong.font-bold= current_user.email

@@ -12,6 +12,10 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'haml-rails', '~> 0.9'
+gem 'font-awesome-rails', '4.3.0.0'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug'

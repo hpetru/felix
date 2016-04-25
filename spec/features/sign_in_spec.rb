@@ -9,7 +9,7 @@ feature 'user sign in' do
     )
     visit new_user_session_path
     fill_in 'Email', with: user.email
-    fill_in 'Password', with: password_stub
+    fill_in 'Parola', with: password_stub
     click_button 'Log in'
 
     expect(page).to_not have_content 'Log in'

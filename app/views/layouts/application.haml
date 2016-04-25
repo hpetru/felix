@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title= 'Liceu'
+    %meta{charset: 'utf-8'}
+    = stylesheet_link_tag 'application', media: 'all'
+
+    -# Include style per-controller - vendor plugins
+    = javascript_include_tag 'application'
+    - content_for :javascript do
+      :javascript
+        app.Modal.setAppElement('#body');
+    = csrf_meta_tags
+
+  %body.md-skin.fixed-sidebar.fixed-nav
+
+    -# Wrapper
+    #wrapper
+      -# Navigation
+      = render 'layouts/navigation'
+
+      #page-wrapper.gray-bg{class: @extra_class}
+        -# Page wrapper
+        = render 'layouts/topnav'
+
+        = yield
+        
+        -# Footer
+        = render 'layouts/footer'
+
+
+  -# Include javascript per-controller - vendor plugins
+  = yield :javascript

@@ -1,0 +1,13 @@
+.row.border-bottom
+  %nav.navbar.navbar-fixed-top.white-bg{role: 'navigation', style: 'margin-bottom: 0'}
+    .navbar-header
+      %a.navbar-minimalize.minimalize-styl-2.btn.btn-primary
+        %i.fa.fa-bars
+      %form.navbar-form-custom{role: 'search', action: '/'}
+        .form-group
+          %input.form-control#top-search{type: 'text', placeholder: 'Căutare', name: 'top-search'}
+    %ul.nav.navbar-top-links.navbar-right
+      %li
+        %a
+          %i.fa.fa-sign-out
+          Log Out
