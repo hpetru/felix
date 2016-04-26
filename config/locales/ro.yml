@@ -20,5 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ro:
-  hello: "Bine ați venit"
-  auth: "Autentificați-vă ca să puteți începe"
+  hello: 'Bine ați venit'
+  auth: 'Autentificați-vă ca să puteți începe'
+  required_field: 'Acest câmp este obligatoriu'
