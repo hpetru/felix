@@ -1,0 +1,22 @@
+= simple_form_for @student_group || StudentGroup.new,
+  wrapper: :horizontal_form, html: { class: 'form-horizontal' } do |f|
+  = f.input :promotion, label: (t 'student_groups.index.table.promotion')
+  = f.input :suffix, label: (t 'student_groups.index.table.suffix'), input_html: { maxlength: 1 }
+  .form-group
+    %label.string.required.col-sm-3.control-label Profil
+    .i-checks
+      = f.collection_radio_buttons :profile_slug, [['real', 'Real'] ,['humanitarian', 'Uman']], :first, :last, :default => true do |b|
+        = b.label(:class => 'checkbox-inline' ) { b.radio_button + b.text}
+
+  .text-center
+    = f.submit :class => 'btn btn-sm btn-primary', :value => 'Salvează'
+
+:javascript
+  $(function() {
+
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+
+  });

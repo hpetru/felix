@@ -1,0 +1,36 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2= t 'student_groups.index.title'
+    = link_to new_student_group_path do
+      %button.btn.btn-primary= t 'student_groups.new.title'
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-6
+      .ibox.float-e-margins
+        .ibox-title
+          %h5= t 'student_groups.index.list'
+        .ibox-content
+          %table.table
+            %thead
+              %tr
+                %td= t 'student_groups.index.table.promotion'
+                %td= t 'student_groups.index.table.suffix'
+                %td= t 'student_groups.index.table.profile_slug'
+                %td= t 'student_groups.index.table.actions'
+            %tbody
+              - if @student_groups.any?
+                - @student_groups.each do |student_group|
+                  %tr
+                    %td= student_group.promotion
+                    %td= student_group.suffix
+                    %td= student_group.profile_slug
+                    %td
+                      = link_to student_group_path(student_group),
+                        method: :delete do
+                        %i.fa.fa-trash
+              - else
+                %tr
+                  %td{ colspan: 4 }
+                    .text-center
+                      = t 'table.empty_text'

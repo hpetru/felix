@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  promotion    :integer          not null
 #  suffix       :string           not null
-#  profile_slug :string           not null
+#  profile_slug :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -19,7 +19,8 @@ class StudentGroup < ActiveRecord::Base
   validates(
     :promotion,
     :suffix,
-    :profile_slug,
     presence: true
   )
+
+  validates :suffix, length: { maximum: 1 }
 end
