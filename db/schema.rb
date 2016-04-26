@@ -11,17 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427081000) do
+ActiveRecord::Schema.define(version: 20160427113628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "semesters", force: :cascade do |t|
+    t.integer  "year",          null: false
+    t.string   "semester_type", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "student_anual_grades", force: :cascade do |t|
+    t.integer  "subject_id", null: false
+    t.float    "value",      null: false
+    t.integer  "year",       null: false
+    t.integer  "student_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "student_groups", force: :cascade do |t|
-    t.integer  "promotion",    null: false
-    t.string   "suffix",       null: false
+    t.integer  "promotion",       null: false
+    t.string   "suffix",          null: false
     t.string   "profile_slug"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "main_teacher_id", null: false
+  end
+
+  create_table "student_semester_grades", force: :cascade do |t|
+    t.float    "value",       null: false
+    t.integer  "subject_id",  null: false
+    t.integer  "student_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "semester_id", null: false
+  end
+
+  create_table "student_thesis_grades", force: :cascade do |t|
+    t.integer  "student_id",  null: false
+    t.integer  "value",       null: false
+    t.integer  "subject_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "semester_id", null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -52,6 +87,14 @@ ActiveRecord::Schema.define(version: 20160427081000) do
     t.boolean  "sindicate_member",   default: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+  end
+
+  create_table "teaching_subjects", force: :cascade do |t|
+    t.integer  "teacher_id",       null: false
+    t.integer  "student_group_id", null: false
+    t.integer  "subject_id",       null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "users", force: :cascade do |t|

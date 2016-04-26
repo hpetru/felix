@@ -9,13 +9,18 @@ FactoryGirl.define do
     last_name 'Breahna'
     birthday '1995-04-25'
     phone '0229999'
-    degree 'I'
+    degree 'first_degree'
   end
 
   factory :student_group do
     promotion 2016
     suffix 'A'
     profile_slug 'real'
+    association(
+      :main_teacher,
+      factory: :teacher,
+      strategy: :build
+    )
   end
 
   factory :subject do

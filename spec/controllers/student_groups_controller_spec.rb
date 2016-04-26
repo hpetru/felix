@@ -26,15 +26,18 @@ describe StudentGroupsController do
     context 'with valid inputs' do
       it 'create a new record' do
         sign_in create(:user)
+        teacher = create(:teacher)
         post :create, student_group: {
           promotion: 2015,
           suffix: 'A',
-          profile_slug: 'real'
+          profile_slug: 'real',
+          main_teacher_id: teacher.id
         }
         student_group = StudentGroup.first
 
         expect(StudentGroup.count).to eq 1
         expect(student_group.promotion).to eq 2015
+        expect(student_group.main_teacher).to eq teacher
         expect(response).to redirect_to(student_groups_path)
       end
     end

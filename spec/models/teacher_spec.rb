@@ -23,4 +23,5 @@ describe Teacher do
   it { should validate_presence_of :last_name }
   it { should validate_presence_of :birthday }
   it { should validate_presence_of :degree }
+  it { should have_many :teaching_subjects }
 end

@@ -1,0 +1,18 @@
+attributes:
+  - content
+  - foreign_key
+  - inheritance
+disconnected: true
+filename: models
+filetype: pdf
+indirect: true
+inheritance: true
+markup: true
+notation: simple
+orientation: horizontal
+polymorphism: true
+sort: true
+warn: true
+exclude: null
+only: null
+prepend_primary: false

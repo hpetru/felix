@@ -23,4 +23,7 @@ class Student < ActiveRecord::Base
   )
 
   belongs_to :student_group
+  has_many :semester_grades, class_name: StudentSemesterGrade
+  has_many :anual_grades, class_name: StudentAnualGrade
+  has_many :thesis_grades, class_name: StudentThesisGrade
 end

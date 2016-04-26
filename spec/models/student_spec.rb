@@ -21,4 +21,7 @@ describe Student do
   it { should validate_presence_of :last_name }
   it { should validate_presence_of :student_group }
   it { should belong_to :student_group }
+  it { should have_many :semester_grades }
+  it { should have_many :anual_grades }
+  it { should have_many :thesis_grades }
 end

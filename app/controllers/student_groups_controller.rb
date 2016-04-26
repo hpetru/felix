@@ -39,6 +39,11 @@ class StudentGroupsController < ApplicationController
 
   def student_group_params
     params.require(:student_group).
-      permit(:suffix, :promotion, :profile_slug)
+      permit(
+        :suffix,
+        :promotion,
+        :profile_slug,
+        :main_teacher_id
+      )
   end
 end

@@ -31,4 +31,6 @@ class Teacher < ActiveRecord::Base
     :degree,
     presence: true
   )
+
+  has_many :teaching_subjects
 end
