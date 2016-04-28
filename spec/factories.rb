@@ -1,4 +1,16 @@
 FactoryGirl.define do
+  factory :address do
+    street "Alba-Iulia"
+    association(
+      :city,
+      factory: :city,
+      strategy: :build
+    )
+  end
+  factory :city do
+    name "Chișinău"
+  end
+
   factory :student do
     first_name 'Doina'
     last_name 'Prodan'

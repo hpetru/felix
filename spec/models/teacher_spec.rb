@@ -14,6 +14,7 @@
 #  sindicate_member   :boolean          default("false")
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  gender             :string           not null
 #
 
 require 'rails_helper'
