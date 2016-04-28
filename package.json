@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "engines": {
     "node": "~5.4.1",
-    "npm": "~3.5.3"
+    "npm": "~3.3.12"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.3.13",
