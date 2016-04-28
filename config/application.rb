@@ -28,5 +28,7 @@ module Felix
 
     config.active_record.raise_in_transactional_callbacks = true
     config.i18n.default_locale = :ro
+
+    config.browserify_rails.commandline_options = '-t [ babelify --presets [ es2015 react ] ]'
   end
 end

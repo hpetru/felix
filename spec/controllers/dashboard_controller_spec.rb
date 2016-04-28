@@ -9,7 +9,7 @@ describe DashboardController do
         sign_in create(:user)
         get :index
 
-        expect(response.body).to have_content('Hello')
+        expect(response.body).to_not have_content('Log in')
       end
     end
 

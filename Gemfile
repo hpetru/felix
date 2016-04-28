@@ -16,6 +16,8 @@ gem 'haml-rails', '~> 0.9'
 gem 'font-awesome-rails', '4.3.0.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
+gem 'browserify-rails'
+gem 'react-rails'
 
 group :development, :test do
   gem 'byebug'

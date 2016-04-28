@@ -1,8 +1,11 @@
 scss:
   enabled: false
-
 ruby:
   config_file: .ruby-style.yml
-
 css:
   enabled: false
+javascript:
+  enabled: false
+eslint:
+  enabled: true
+  config_file: .eslintrc
