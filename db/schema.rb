@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505064658) do
+ActiveRecord::Schema.define(version: 20160510102152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,29 @@ ActiveRecord::Schema.define(version: 20160505064658) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street",     null: false
+    t.integer  "city_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "institutions", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "nationalities", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "semesters", force: :cascade do |t|
     t.integer  "year",          null: false
@@ -75,11 +98,30 @@ ActiveRecord::Schema.define(version: 20160505064658) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.string   "first_name",       null: false
-    t.string   "last_name",        null: false
-    t.integer  "student_group_id", null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "first_name",          null: false
+    t.string   "last_name",           null: false
+    t.integer  "student_group_id",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.date     "came_at"
+    t.string   "idnp"
+    t.integer  "address_id"
+    t.string   "address_house"
+    t.string   "address_appartment"
+    t.string   "father_last_name"
+    t.string   "father_first_name"
+    t.string   "father_phone_number"
+    t.string   "mother_last_name"
+    t.string   "mother_first_name"
+    t.string   "mother_phone_number"
+    t.string   "mother_email"
+    t.string   "gender",              null: false
+    t.string   "inside_code_token",   null: false
+    t.date     "birthday"
+    t.string   "father_email"
+    t.integer  "foreign_language_id"
+    t.integer  "came_from_id"
+    t.integer  "nationality_id",      null: false
   end
 
   add_index "students", ["student_group_id"], name: "index_students_on_student_group_id", using: :btree
@@ -90,18 +132,25 @@ ActiveRecord::Schema.define(version: 20160505064658) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subjects_teachers", id: false, force: :cascade do |t|
+    t.integer "subject_id", null: false
+    t.integer "teacher_id", null: false
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.string   "first_name",                         null: false
     t.string   "last_name",                          null: false
     t.date     "birthday",                           null: false
     t.string   "phone"
     t.string   "degree"
-    t.string   "graduated_from"
+    t.integer  "graduated_from_id"
     t.integer  "degree_reeval_year"
     t.boolean  "retired",            default: false
-    t.boolean  "sindicate_member",   default: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.string   "gender",                             null: false
+    t.boolean  "syndicate_member",   default: false
+    t.string   "idnp_token"
   end
 
   create_table "teaching_subjects", force: :cascade do |t|

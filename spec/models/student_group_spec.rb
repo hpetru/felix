@@ -16,7 +16,6 @@ require 'rails_helper'
 describe StudentGroup do
   it { should validate_presence_of :promotion }
   it { should validate_presence_of :suffix }
-  it { should validate_presence_of :profile_slug }
   it { should validate_presence_of :main_teacher }
   it { should belong_to :main_teacher }
   it { should have_many :students }

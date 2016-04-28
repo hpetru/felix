@@ -20,12 +20,12 @@ class StudentGroup < ActiveRecord::Base
   validates(
     :promotion,
     :suffix,
-    :profile_slug,
     :main_teacher,
     presence: true
   )
-  validates :suffix, length: { maximum: 1 }
 
+  validates :suffix, length: { maximum: 1 }
+  has_many :students
   belongs_to :main_teacher, class_name: Teacher
   has_many :students
 
