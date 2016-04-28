@@ -1,3 +1,8 @@
+User.create!(
+  email: 'hincupetru@gmail.com',
+  password: 'babuin2015'
+)
+
 first_semester = Semester.create(
   year: 2015,
   semester_type: 'first_semester'
