@@ -9,17 +9,4 @@
     .col-lg-6
       .ibox.float-e-margins
         .ibox-content
-          %table.table.table-striped
-            %thead
-              %tr
-                %th Nume
-            %tbody
-              - if @subjects.any?
-                - @subjects.each do |subject|
-                  %tr
-                    %td
-                      = link_to subject.name, subject_path(subject)
-              - else
-                %tr
-                  %td{colspan: '4'}
-                    .text-center Nu există înregistrări
+          = react_component('app.Subjects', subjects: @subjects)
