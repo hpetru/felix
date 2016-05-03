@@ -30,5 +30,12 @@ module Felix
     config.i18n.default_locale = :ro
 
     config.browserify_rails.commandline_options = '-t [ babelify --presets [ es2015 react ] ]'
+
+    config.eager_load_paths += %W(
+      #{config.root}/lib
+    )
+    config.autoload_paths += %W(
+      #{config.root}/lib
+    )
   end
 end

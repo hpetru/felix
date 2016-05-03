@@ -18,6 +18,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'browserify-rails'
 gem 'react-rails'
+gem 'timecop'
 
 group :development, :test do
   gem 'byebug'

@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 5.4.0
+  post:
+    - npm install -g npm@3.5.3
+dependencies:
+  override:
+    - npm install
+    - bundle install

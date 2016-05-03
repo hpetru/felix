@@ -27,4 +27,18 @@ class StudentGroup < ActiveRecord::Base
   validates :suffix, length: { maximum: 1 }
 
   belongs_to :main_teacher, class_name: Teacher
+
+  def current_grade
+    current_study_year - promotion + 1
+  end
+
+  private
+
+  def current_study_year
+    if Date.today.month > 8
+      Date.today.year
+    else
+      Date.today.year - 1
+    end
+  end
 end

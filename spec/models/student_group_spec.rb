@@ -19,4 +19,16 @@ describe StudentGroup do
   it { should validate_presence_of :profile_slug }
   it { should validate_presence_of :main_teacher }
   it { should belong_to :main_teacher }
+
+  describe '#current_grade' do
+    it do
+      new_time = Time.local(2016, 9, 1, 12, 0, 0)
+      Timecop.freeze(new_time)
+      group = described_class.new(promotion: 2005)
+
+      expect(group.current_grade).to eq(
+        12
+      )
+    end
+  end
 end
