@@ -3,7 +3,10 @@ machine:
     version: 5.4.0
   post:
     - npm install -g npm@3.5.3
+<<<<<<< 059056790b97fe9b2541801ea697cec2e46655f3
 dependencies:
   override:
     - npm install
     - bundle install
+=======
+>>>>>>> circle config
