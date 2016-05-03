@@ -20,7 +20,11 @@
     "react-modal": "~> 0.6.1",
     "underscore": ">= 1.8.3",
     "jquery": ">= 2.1.1",
-    "react-immutable-render-mixin": "~> 0.9.2"
+    "react-immutable-render-mixin": "~> 0.9.2",
+    "classnames": "~> 2.2.3",
+    "react-select": "~> 1.0.0-beta8",
+    "react-modal": "~> 0.6.1",
+    "underscore": ">= 1.8.3"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",

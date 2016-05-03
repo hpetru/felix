@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'underscore';
+<<<<<<< 3cc8e19920880cc8f630a961788b9e50a5986382
 import Thead from './Thead.jsx';
 import Tbody from './Tbody.jsx';
 import tableFetcher from './ajax/tableFetcher.js';
@@ -133,13 +134,3 @@ FlexyTable.defaultProps = {
 }
 
 module.exports = immutableRenderDecorator(FlexyTable);
-
-class FlexyTable extends React.Component {
-  render () {
-    <div>
-      Test string
-    </div>
-  }
-}
-
-module.export = FlexyTable;

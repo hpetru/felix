@@ -1,5 +1,8 @@
 import React from 'react';
+<<<<<<< 3cc8e19920880cc8f630a961788b9e50a5986382
 import Th from './Th.jsx';
+=======
+>>>>>>> table skeleton
 
 class Thead extends React.Component {
   constructor(props) {
@@ -11,10 +14,16 @@ class Thead extends React.Component {
 
     for(const column of this.props.columns) {
       columns.push(
+<<<<<<< 3cc8e19920880cc8f630a961788b9e50a5986382
         <Th
           label={column.label}
           columnId={column.id}
         />
+=======
+        <th>
+          Heheaa
+        </th>
+>>>>>>> table skeleton
       );
     }
 
