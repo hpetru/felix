@@ -5,12 +5,13 @@ function tableFetcher({ id, onSuccess }) {
   const apiEndpoint = `/api/v0/tables/${id}`;
 
   $.ajax({
-    httpMethod,
-    apiEndpoint,
+    method: httpMethod,
+    url: apiEndpoint,
     success: onSuccess,
-    error: () => {
-      debugger;
-    }
+    error: onSuccess,
+    //error: () => {
+    //  console.log('API endpoit error');
+    //}
   });
 }
 
