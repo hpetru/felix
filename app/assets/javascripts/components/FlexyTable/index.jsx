@@ -133,3 +133,13 @@ FlexyTable.defaultProps = {
 }
 
 module.exports = immutableRenderDecorator(FlexyTable);
+
+class FlexyTable extends React.Component {
+  render () {
+    <div>
+      Test string
+    </div>
+  }
+}
+
+module.export = FlexyTable;
