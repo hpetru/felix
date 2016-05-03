@@ -1,4 +1,3 @@
-import React from 'react';
 import $ from 'jquery';
 
 function tableFetcher({ id, onSuccess }) {
@@ -10,11 +9,9 @@ function tableFetcher({ id, onSuccess }) {
     url: apiEndpoint,
     success: onSuccess,
     error: onSuccess,
-    /*
-    error: () => {
-      console.log('API endpoit error');
-    }
-    */
+    //error: () => {
+    //  console.log('API endpoit error');
+    //}
   });
 }
 

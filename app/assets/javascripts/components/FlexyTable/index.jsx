@@ -1,16 +1,9 @@
 import React from 'react';
 import _ from 'underscore';
-<<<<<<< f0e62338756701fc4c2c1d2b7ca3db2f2ebd592f
-<<<<<<< 3cc8e19920880cc8f630a961788b9e50a5986382
 import Thead from './Thead.jsx';
 import Tbody from './Tbody.jsx';
 import tableFetcher from './ajax/tableFetcher.js';
 import columnFetcher from './ajax/columnFetcher.js';
-=======
-import Thead from './Thead.jsx';
-import Tbody from './Tbody.jsx';
-import tableFetcher from './tableFetcher.js';
->>>>>>> spike
 import immutable from 'seamless-immutable';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';
 
@@ -21,7 +14,6 @@ class FlexyTable extends React.Component {
     this.state = {
       columns: immutable([]),
       rows: immutable([]),
-      i: 0,
     };
 
     this.loadTable = this.loadTable.bind(this);
