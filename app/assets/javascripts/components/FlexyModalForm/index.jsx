@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
+import Form from './Form/index.jsx';
 
-class ModalForm extends React.Component {
+class FlexyModalForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,32 +33,23 @@ class ModalForm extends React.Component {
         <Modal
           isOpen={this.state.modalIsOpen}
           className="modal-dialog">
-          <div className="modal-header">
-            <h2 className="modal-title text-center">Clase</h2>
-          </div>
           <div className="modal-body">
-            <div className="form-group">
-              <label className="control-label">Title</label>
-              <input
-                type="text"
-                className="form-control"
+            <Form
+              strategySlug={this.props.strategySlug}
               />
-            </div>
-            <div className="form-group">
-              <label className="control-label">Content</label>
-              <textarea
-                className="form-control"
-              />
-            </div>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-default" onClick={this.handleModalCloseRequest}>Close</button>
             <button type="button" className="btn btn-primary">Save</button>
-          </div>
+        </div>
         </Modal>
       </div>
     )
   }
 }
 
-module.exports = ModalForm;
+FlexyModalForm.propTypes = {
+  strategySlug: React.PropTypes.string.isRequired,
+}
+
+module.exports = FlexyModalForm;

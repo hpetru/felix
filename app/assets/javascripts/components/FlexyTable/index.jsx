@@ -6,7 +6,7 @@ import tableFetcher from './ajax/tableFetcher.js';
 import columnFetcher from './ajax/columnFetcher.js';
 import immutable from 'seamless-immutable';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';
-import ModalForm from './ModalForm/index.jsx';
+import FlexyModalForm from '../FlexyModalForm/index.jsx';
 
 class FlexyTable extends React.Component {
   constructor(props) {
@@ -111,7 +111,9 @@ class FlexyTable extends React.Component {
   render() {
     return (
       <div className="flexy-table">
-        <ModalForm />
+        <FlexyModalForm
+          strategySlug={this.props.tableStrategySlug}
+          />
         <table className="table table-striped">
           <Thead
             columns={this.state.columns}
