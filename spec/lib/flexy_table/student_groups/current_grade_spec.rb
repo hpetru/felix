@@ -15,6 +15,7 @@ describe FlexyTable::StudentGroups::CurrentGrade do
     end
   end
 
+<<<<<<< 53806e0aae20c663f378919caa1bbcd522098c1f
   describe '#strategy_column' do
     it do
       strategy = described_class.new('')
@@ -25,6 +26,8 @@ describe FlexyTable::StudentGroups::CurrentGrade do
     end
   end
 
+=======
+>>>>>>> my first strategy
   describe '#strategy_data' do
     it do
       strategy = described_class.new({})
