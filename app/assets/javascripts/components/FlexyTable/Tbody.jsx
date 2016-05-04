@@ -20,16 +20,10 @@ class Tbody extends React.Component {
     return (
       <tbody>
         {trList}
-
-class Tbody extends React.Component {
-  render() {
-    return (
-      <tbody>
       </tbody>
     )
   }
 }
-
 
 Tbody.propTypes = {
   columns: React.PropTypes.array.isRequired,
