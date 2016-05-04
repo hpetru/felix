@@ -7,49 +7,42 @@ class FlexyModalForm extends React.Component {
     super(props);
 
     this.state = {
-      modalIsOpen: false,
+      formVisible: false
     }
-
-    this.openModal = this.openModal.bind(this);
-    this.handleModalCloseRequest = this.handleModalCloseRequest.bind(this);
-  }
-
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  handleModalCloseRequest() {
-    this.setState({ modalIsOpen: false });
   }
 
   componentWillMount() {
     Modal.setAppElement('body');
   }
 
+  toggleFormVisibility(formVisible) {
+    this.setState({ formVisible });
+  }
+
   render() {
     return (
-      <div>
-        <button className="btn btn-primary" onClick={this.openModal}>Open Modal</button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          className="modal-dialog">
-          <div className="modal-body">
-            <Form
-              strategySlug={this.props.strategySlug}
-              />
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-default" onClick={this.handleModalCloseRequest}>Close</button>
-            <button type="button" className="btn btn-primary">Save</button>
-        </div>
-        </Modal>
-      </div>
+      <Modal
+        isOpen={this.state.formVisible}
+        className="modal-dialog">
+        <Form
+          recordData={this.props.recordData}
+          strategySlug={this.props.strategySlug}
+          onSaveSuccess={this.props.onSaveSuccess}
+          onToggleVisibility={this.toggleFormVisibility}
+        />
+      </Modal>
     )
   }
 }
 
 FlexyModalForm.propTypes = {
   strategySlug: React.PropTypes.string.isRequired,
+  onSaveSuccess: React.PropTypes.func.isRequired,
+  visible: React.PropTypes.bool.isRequired,
+}
+
+FlexyModalForm.defaultProps = {
+  visible: false,
 }
 
 module.exports = FlexyModalForm;

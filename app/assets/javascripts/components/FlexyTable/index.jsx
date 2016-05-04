@@ -108,12 +108,17 @@ class FlexyTable extends React.Component {
     )
   }
 
+  onSaveSuccess() {
+    debugger;
+  }
+
   render() {
     return (
       <div className="flexy-table">
         <FlexyModalForm
           strategySlug={this.props.tableStrategySlug}
-          />
+          onSaveSuccess={this.onSaveSuccess}
+        />
         <table className="table table-striped">
           <Thead
             columns={this.state.columns}

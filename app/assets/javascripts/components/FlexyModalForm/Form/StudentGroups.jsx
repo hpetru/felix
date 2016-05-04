@@ -22,4 +22,9 @@ class StudentGroups extends React.Component {
   }
 };
 
+StudentGroups.propTypes = {
+  onSaveSuccess: React.PropTypes.func.isRequired,
+  onToggleVisibility: React.PropTypes.func.isRequired,
+}
+
 module.exports = StudentGroups;

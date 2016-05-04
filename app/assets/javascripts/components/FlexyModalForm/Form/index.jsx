@@ -1,7 +1,7 @@
 import React from 'react';
 import componentMapping from './componentMapping.js';
 
-function Form({ strategySlug }) {
+function Form({ strategySlug, onToggleVisibility, onSaveSuccess }) {
   const FormComponent = componentMapping[strategySlug];
 
   if(FormComponent === undefined) {
@@ -10,30 +10,17 @@ function Form({ strategySlug }) {
   }
 
   return (
-    <FormComponent />
+    <FormComponent
+      onSaveSuccess={onSaveSuccess}
+      onToggleVisibility={onToggleVisibility}
+    />
   );
-
-   //return (
-   //  <div>
-   //    <div className="form-group">
-   //      <label className="control-label">Title</label>
-   //      <input
-   //        type="text"
-   //        className="form-control"
-   //      />
-   //    </div>
-   //    <div className="form-group">
-   //      <label className="control-label">Content</label>
-   //      <textarea
-   //        className="form-control"
-   //      />
-   //    </div>
-   //  </div>
-   //);
 }
 
 Form.propTypes = {
   strategySlug: React.PropTypes.string.isRequired,
+  onSaveSuccess: React.PropTypes.func.isRequired,
+  onToggleVisibility: React.PropTypes.func.isRequired,
 }
 
 module.exports = Form;
