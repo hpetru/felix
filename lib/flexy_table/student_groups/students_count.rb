@@ -11,6 +11,7 @@ module FlexyTable
 
       def self.strategy_column
         {
+          'id' => 'student_groups_students_counts',
           'label' => 'Numărul elevilor'
         }
       end

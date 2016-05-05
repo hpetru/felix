@@ -18,6 +18,7 @@ describe FlexyTable::StudentGroups::Suffix do
   describe '.strategy_column' do
     it do
       expect(described_class.strategy_column).to eq(
+        'id' => 'student_groups_suffix',
         'label' => 'Paralela'
       )
     end

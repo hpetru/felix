@@ -18,9 +18,8 @@ describe FlexyTable::StudentGroups::MainTeacherName do
   describe '.strategy_column' do
     it do
       expect(described_class.strategy_column).to eq(
-        {
-          'label': 'Diriginte'
-        }
+          'id' => 'student_groups_main_teacher_name',
+          'label' => 'Diriginte'
       )
     end
   end

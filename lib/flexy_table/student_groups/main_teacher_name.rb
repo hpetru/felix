@@ -1,6 +1,6 @@
 module FlexyTable
   module StudentGroups
-    class MainTeacherName < Base
+    class MainTeacherName < StudentGroups::Base
       def self.strategy_slug
         'main_teacher_name'
       end
@@ -9,9 +9,10 @@ module FlexyTable
         {}
       end
 
-      def self.strategy_column
+      def strategy_column
         {
-          'label': 'Diriginte'
+          'id' => 'student_groups_main_teacher_name',
+          'label' => 'Diriginte'
         }
       end
 
