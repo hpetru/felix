@@ -1,13 +1,33 @@
 ActiveAdmin.register StudentGroup do
   permit_params :promotion, :suffix, :main_teacher_id, :profile_slug
+  menu label: 'Clase', priority: 2
 
-  index do
+  index title: 'Clase' do
     column :current_grade
     column :suffix
     column :main_teacher
     column :profile_slug
     column :students_count
     actions
+  end
+
+  show title: ->(group) { "Clasa #{group}" } do |group|
+    attributes_table do
+      row :promotion
+      row :current_grade
+      row :suffix
+      row :profile_slug
+      row :main_teacher
+      row :students_count
+    end
+
+    panel 'Studenti' do
+      table_for group.students, sortable: true do
+        column 'Nume student' do |student|
+          a student.full_name, href: admin_student_path(student)
+        end
+      end
+    end
   end
 
   form do |f|

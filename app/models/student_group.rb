@@ -37,6 +37,10 @@ class StudentGroup < ActiveRecord::Base
     students.count
   end
 
+  def to_s
+    "#{current_grade} #{suffix} - #{main_teacher.full_name}"
+  end
+
   private
 
   def current_study_year

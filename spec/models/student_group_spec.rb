@@ -32,4 +32,18 @@ describe StudentGroup do
       )
     end
   end
+
+  describe '#to_s' do
+    it do
+      main_teacher = create(:teacher)
+      group = described_class.new(
+        suffix: 'A',
+        main_teacher: main_teacher
+      )
+      allow(group).to receive(:current_grade).
+        and_return(9)
+
+      expect(group.to_s).to eq("9 A - #{main_teacher.full_name}")
+    end
+  end
 end

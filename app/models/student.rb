@@ -27,6 +27,8 @@ class Student < ActiveRecord::Base
   has_many :anual_grades, class_name: StudentAnualGrade
   has_many :thesis_grades, class_name: StudentThesisGrade
 
+  delegate :main_teacher, to: :student_group
+
   def full_name
     "#{first_name} #{last_name}"
   end

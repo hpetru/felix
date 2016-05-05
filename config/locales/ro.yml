@@ -26,6 +26,9 @@ ro:
   date:
     formats:
       long: '%Y-%m-%d'
+  active_admin:
+    powered_by: "Powered with love by Dorin & Petru"
+
   hello: "Bine ați venit"
   auth: "Autentificați-vă ca să puteți începe"
   table:
