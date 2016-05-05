@@ -24,4 +24,17 @@ describe Student do
   it { should have_many :semester_grades }
   it { should have_many :anual_grades }
   it { should have_many :thesis_grades }
+
+  describe '#full_name' do
+    it do
+      student = described_class.new(
+        first_name: 'Ion',
+        last_name: 'Babuc'
+      )
+
+      expect(student.full_name).to eq(
+        'Ion Babuc'
+      )
+    end
+  end
 end

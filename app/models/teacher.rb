@@ -33,4 +33,9 @@ class Teacher < ActiveRecord::Base
   )
 
   has_many :teaching_subjects
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+  alias :to_s :full_name
 end

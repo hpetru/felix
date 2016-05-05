@@ -19,6 +19,7 @@ describe StudentGroup do
   it { should validate_presence_of :profile_slug }
   it { should validate_presence_of :main_teacher }
   it { should belong_to :main_teacher }
+  it { should have_many :students }
 
   describe '#current_grade' do
     it do

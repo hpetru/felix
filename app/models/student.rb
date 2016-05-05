@@ -26,4 +26,9 @@ class Student < ActiveRecord::Base
   has_many :semester_grades, class_name: StudentSemesterGrade
   has_many :anual_grades, class_name: StudentAnualGrade
   has_many :thesis_grades, class_name: StudentThesisGrade
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+  alias :to_s :full_name
 end

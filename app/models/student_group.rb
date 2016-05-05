@@ -27,9 +27,14 @@ class StudentGroup < ActiveRecord::Base
   validates :suffix, length: { maximum: 1 }
 
   belongs_to :main_teacher, class_name: Teacher
+  has_many :students
 
   def current_grade
     current_study_year - promotion + 1
+  end
+
+  def students_count
+    students.count
   end
 
   private

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   namespace :api do
     namespace :v0 do
       get 'flexy_table', to: 'flexy_table#index'
