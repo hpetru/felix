@@ -1,7 +1,10 @@
 module FlexyTable
   module StudentGroups
     STRATEGIES = [
-      StudentGroups::CurrentGrade
+      StudentGroups::CurrentGrade,
+      StudentGroups::Suffix,
+      StudentGroups::MainTeacherName,
+      StudentGroups::StudentsCount
     ].freeze
 
     def self.table_strategy_slug
