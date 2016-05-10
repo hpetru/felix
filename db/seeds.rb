@@ -4,6 +4,11 @@ User.create!(
 )
 
 User.create!(
-  email: 'doringutsu@gmail.com'
+  email: 'doringutsu@gmail.com',
   password: 'messenger'
+)
+
+User.create!(
+  email: 'grigore.vasilache@gmail.com',
+  password: 'grigore.vasilache@gmail.com'
 )
