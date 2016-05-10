@@ -18,31 +18,165 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
-
 ro:
+  activerecord:
+    models:
+      student:
+        one:
+          'Elev'
+        other:
+          'Elevi'
+      teacher:
+        one:
+          'Profesor'
+        other:
+          'Profesori'
+      subject:
+        one:
+          'Materie'
+        other:
+          'Materii'
+      student_group:
+        one:
+          'Clasă'
+        other:
+          'Clase'
+    attributes:
+      student:
+        id: 'ID'
+        first_name: 'Prenume'
+        last_name: 'Nume'
+        student_group: 'Clasa'
+        main_teacher: 'Dirigintele'
+        nationality: 'Naționalitatea'
+        address: 'Adresa'
+        address_house: 'Casa'
+        address_appartment: 'Apartamentul'
+        foreign_language: 'Limba străină'
+        came_at: 'Data venirii'
+        came_from: 'Venit din'
+        semester_grades: 'Note semestriale'
+        annual_grades: 'Note anuale'
+        thesis_grades: 'Teze'
+        father_first_name: 'Prenumele tatălui'
+        father_last_name: 'Numele tatălui'
+        father_phone_number: 'Telefonul tatălui'
+        father_email: 'Email-ul tatălui'
+        mother_first_name: 'Prenumele mamei'
+        mother_last_name: 'Numele mamei'
+        mother_phone_number: 'Telefonul mamei'
+        mother_email: 'Email-ul mamei'
+        gender: 'Gen'
+        inside_code_token: 'Codul intern'
+        birthday: 'Data nașterii'
+      student_group:
+        current_grade: 'Clasa curentă'
+        suffix: 'Paralela'
+        profile_slug: 'Profil'
+        students_count: 'Nr. elevi'
+        student_groups: 'Diriginte'
+        promotion: 'Promoția'
+        students: 'Elevi'
+      subject:
+        name: 'Nume'
+      teacher:
+        id: 'ID'
+        first_name: 'Prenume'
+        last_name: 'Nume'
+        student_groups: 'Clase'
+        is_main_teacher: 'Diriginte'
+        nationality: 'Naționalitatea'
+        subjects: 'Materii'
+        birthday: 'Data nașterii'
+        retired: 'Pensionar'
+        syndicate_member: 'Membru de sindicat'
+        phone: 'Telefon'
+        degree: 'Grad didactic'
+        idnp_token: 'IDNP'
+        graduated_from: 'Instituția absolvită'
+        degree: 'Gradul didactic'
+        degree_reeval_year: 'Anul confirmării gradului'
+        gender: 'Gen'
+  devise:
+    failure:
+      user:
+        unauthenticated:
+          'Pentru a purcede mai departe trebuie să vă autentificați'
+        invalid:
+          'Emailul este greșit'
+  active_admin:
+    view: 'Vizualiare'
+    edit: 'Editare'
+    delete: 'Ștergere'
+    delete_confirmation: 'Sunteți sigur că doriți să ștergeți înregistrarea?'
+    new_model: '%{model} nou'
+    edit_model: 'Editare %{model}'
+    delete_model: 'Ștergere %{model}'
+    details: 'Detalii despre %{model}'
+    cancel: 'Anulare'
+    empty: 'Gol'
+    previous: 'Precedent'
+    next: 'Următorul'
+    download: 'Descărcare:'
+    has_many_new: '%{model} nou(ă)'
+    has_many_delete: 'Șterge'
+    has_many_remove: 'Înlătură'
+    filters:
+      buttons:
+        filter: 'Filtrare'
+        clear: 'Șterge filtrele'
+      predicates:
+        contains: 'Conține'
+        equals: 'Egal cu'
+        starts_with: 'Începe cu'
+        ends_with: 'Se termină cu'
+        greater_than: 'Mai mare ca'
+        less_than: 'Mai mic ca'
+    status_tag:
+      "yes": 'Da'
+      "no": 'Nu'
+    search_status:
+      headline: 'Starea căutării:'
+      current_scope: 'Domeniul:'
+      current_filters: 'Filtre curente:'
+      no_current_filters: 'Nici unul'
+    devise:
+      email:
+        title: 'Email'
+      password:
+        title: 'Parola'
+    powered_by: 'Powered with mad gay love by Dorin & Petru'
+    pagination:
+      empty: 'Nu au fost găsite înregistrări'
+      one: 'Este afișată <b>o singură</b> înregistrare'
+      one_page: 'Sunt afișate <b>toate %{n}</b> înregistrări'
+      multiple: 'Sunt afișate înregistrările <b>%{from}&nbsp;-&nbsp;%{to}</b> din <b>%{total}</b> în total'
+      multiple_without_total: 'Sunt afișate înregistrările <b>%{from}&nbsp;-&nbsp;%{to}</b>'
+      entry:
+        one: 'înregistrare'
+        other: 'înregistrări'
+    any: 'Oricare'
+    blank_slate:
+      content: 'Nu există înregistrări la moment.'
+      link: 'Creare'
+    dropdown_actions:
+      button_label: 'Acțiuni'
+    batch_actions:
+      button_label: 'Acțiuni de grupare'
+      default_confirmation: 'Sunteți sigur?'
+      delete_confirmation: 'Sunteți sigur că doriți să ștergeți înregistrările selectate?'
+      succesfully_destroyed:
+        one: '1 %{model} au fost șterși(se)'
+        other: '%{count} %{plural_model} au fost șterși(se)'
+      selection_toggle_explanation: '(Toggle Selection)'
+      link: 'Înregistrare nouă'
+      action_label: '%{title} Selected'
+      labels:
+        destroy: 'Șterge'
   time:
     formats:
       long: '%Y-%m-%d %H:%M:%S'
   date:
     formats:
       long: '%Y-%m-%d'
-  active_admin:
-    powered_by: "Powered with love by Dorin & Petru"
-
-  hello: "Bine ați venit"
-  auth: "Autentificați-vă ca să puteți începe"
-  table:
-    empty_text: 'Nu sunt înregistrări'
-  student_groups:
-    new:
-      title: 'Adaugă o clasă nouă'
-    edit:
-      title: 'Editare clasă'
-    index:
-      title: 'Clase'
-      list: 'Lista claselor'
-      table:
-        promotion: 'Promoția'
-        suffix: 'Paralela'
-        profile_slug: 'Profilul'
-        actions: 'Acțiuni'
+  hello: 'Bine ați venit'

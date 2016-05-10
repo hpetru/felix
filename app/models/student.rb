@@ -53,7 +53,7 @@ class Student < ActiveRecord::Base
   belongs_to :student_group
   belongs_to :address
   has_many :semester_grades, class_name: StudentSemesterGrade
-  has_many :anual_grades, class_name: StudentAnualGrade
+  has_many :annual_grades, class_name: StudentAnnualGrade
   has_many :thesis_grades, class_name: StudentThesisGrade
   belongs_to :came_from, class_name: Institution
   belongs_to :foreign_language, class_name: Subject

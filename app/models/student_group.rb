@@ -41,6 +41,10 @@ class StudentGroup < ActiveRecord::Base
     "#{current_grade} #{suffix} - #{main_teacher.full_name}"
   end
 
+  def display
+    "#{current_grade} #{suffix}"
+  end
+
   private
 
   def current_study_year

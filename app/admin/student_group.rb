@@ -21,7 +21,7 @@ ActiveAdmin.register StudentGroup do
       row :students_count
     end
 
-    panel 'Studenti' do
+    panel 'Studenți' do
       table_for group.students, sortable: true do
         column 'Nume student' do |student|
           a student.full_name, href: admin_student_path(student)

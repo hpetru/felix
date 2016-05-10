@@ -45,4 +45,16 @@ describe StudentGroup do
       expect(group.to_s).to eq("9 A - #{main_teacher.full_name}")
     end
   end
+
+  describe '#display' do
+    it do
+      new_time = Time.local(2016, 9, 1, 12, 0, 0)
+      Timecop.freeze(new_time)
+      group = described_class.new(promotion: 2005, suffix: 'A')
+      allow(group).to receive(:current_grade).
+        and_return(9)
+
+      expect(group.display).to eq("9 A")
+    end
+  end
 end

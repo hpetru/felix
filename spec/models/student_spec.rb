@@ -46,7 +46,7 @@ describe Student do
   it { should belong_to :foreign_language }
   it { should belong_to :student_group }
   it { should have_many :semester_grades }
-  it { should have_many :anual_grades }
+  it { should have_many :annual_grades }
   it { should have_many :thesis_grades }
   it { should belong_to :came_from }
 

@@ -11,15 +11,13 @@
 #  updated_at :datetime         not null
 #
 
-class StudentAnualGrade < ActiveRecord::Base
-  validates(
-    :value,
-    :year,
-    :subject,
-    :student,
-    presence: true
-  )
+require 'rails_helper'
 
-  belongs_to :student
-  belongs_to :subject
+describe StudentAnnualGrade do
+  it { should validate_presence_of :value }
+  it { should validate_presence_of :year }
+  it { should validate_presence_of :student }
+  it { should validate_presence_of :subject }
+  it { should belong_to :student }
+  it { should belong_to :subject }
 end

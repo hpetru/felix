@@ -37,13 +37,25 @@ class Teacher < ActiveRecord::Base
     :birthday,
     presence: true
   )
-  has_and_belongs_to_many :subjects, through: :subjects
+  has_and_belongs_to_many :subjects
   has_many :teaching_subjects
-  belongs_to :graduated_from, class_name: Institution.to_s
+  has_many :student_groups, foreign_key: :main_teacher_id, class_name: StudentGroup
+  belongs_to :graduated_from, class_name: Institution
 
 
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def show_degree
+    {
+      doctorate: 'Doctorat',
+      superior_degree: 'Superior',
+      first_degree: 'Gradul I',
+      second_degree: 'Gradul II',
+      third_degree: 'Gradul III'
+    }[degree.to_sym]
+  end
+
   alias :to_s :full_name
 end

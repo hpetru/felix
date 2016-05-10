@@ -1,12 +1,22 @@
 ActiveAdmin.register Student do
   permit_params :first_name, :last_name, :student_group_id
-  menu label: 'Studenți', priority: 1
+  menu label: 'Elevi', priority: 1
 
-  index title: 'Studenți' do
-    column :id
+  filter :last_name
+  filter :first_name
+  filter :student_group, as: :select
+  filter :birthday
+  filter :foreign_language
+  filter :nationality, as: :select
+  filter :gender, as: :select, collection: [['Băieți', 'male'], ['Fete', 'female']]
+  filter :came_from, as: :select,
+          collection: Institution.joins(:students).uniq(:name).order(:name)
+
+  index title: 'Elevi' do
+    column :inside_code_token
     column :first_name
     column :last_name
-    column :student_group
+    column :student_group, sortable: 'student_group.promotion, student_group.suffix'
     actions
   end
 
