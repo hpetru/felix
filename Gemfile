@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 gem 'activeadmin', github: 'activeadmin'
+gem 'flattened_active_admin'
 gem 'rails', '4.2.6'
 gem 'pg'
 gem 'pry'
