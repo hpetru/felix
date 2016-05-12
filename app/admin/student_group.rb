@@ -3,7 +3,7 @@ ActiveAdmin.register StudentGroup do
   menu label: 'Clase', priority: 2
 
   index title: 'Clase' do
-    column :current_grade
+    column :current_grade, sortable: :promotion
     column :suffix
     column :main_teacher
     column :profile_slug

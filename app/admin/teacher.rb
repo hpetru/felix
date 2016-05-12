@@ -1,4 +1,5 @@
 ActiveAdmin.register Teacher do
+  config.sort_order = ['last_name_asc', 'first_name_asc', 'birthday_desc']
   menu label: 'Profesori', priority: 3
 
   filter :last_name
@@ -21,8 +22,8 @@ ActiveAdmin.register Teacher do
   filter :syndicate_member, as: :boolean
 
   index title: 'Profesori' do
-    column :first_name
     column :last_name
+    column :first_name
     column :student_groups do |teacher|
       teacher.student_groups.order(:promotion, :suffix).map do |group|
         link_to group.display, admin_student_group_path(group)

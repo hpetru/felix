@@ -1,4 +1,5 @@
 ActiveAdmin.register Student do
+  config.sort_order = ['last_name_asc', 'first_name_asc', 'born_at_desc']
   permit_params(
     :first_name,
     :last_name,
@@ -6,6 +7,7 @@ ActiveAdmin.register Student do
     :came_from_id,
     :came_at,
     :nationality_id,
+    :born_at,
     :idnp_token,
     :address_id,
     :address_house,
@@ -29,7 +31,7 @@ ActiveAdmin.register Student do
   filter :last_name
   filter :first_name
   filter :student_group, as: :select
-  filter :birthday
+  filter :born_at
   filter :foreign_language
   filter :nationality, as: :select
   filter :gender, as: :select, collection: [['Băieți', 'male'], ['Fete', 'female']]
@@ -39,10 +41,11 @@ ActiveAdmin.register Student do
 
   index title: 'Elevi' do
     column :inside_code_token
-    column :first_name
     column :last_name
+    column :first_name
     column :student_group,
       sortable: 'student_group.promotion, student_group.suffix'
+    column :born_at
     actions
   end
 
@@ -52,6 +55,22 @@ ActiveAdmin.register Student do
       row :last_name
       row :student_group
       row :main_teacher
+      row :foreign_language
+      row :born_at
+      row :gender
+      row :email
+      row :idnp_token
+      row :address
+      row :address_house
+      row :address_appartment
+      row :mother_first_name
+      row :mother_last_name
+      row :mother_phone_number
+      row :mother_email
+      row :father_first_name
+      row :father_last_name
+      row :father_phone_number
+      row :father_email
     end
   end
 

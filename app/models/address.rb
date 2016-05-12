@@ -15,6 +15,11 @@ class Address < ActiveRecord::Base
     :street,
     presence: true
   )
+
+  def to_s
+    "#{city.name} - #{street}"
+  end
+
   belongs_to :city
 
   def display_name

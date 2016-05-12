@@ -68,7 +68,7 @@ ro:
         mother_email: 'Email-ul mamei'
         gender: 'Gen'
         inside_code_token: 'Codul intern'
-        birthday: 'Data nașterii'
+        born_at: 'Data nașterii'
       student_group:
         current_grade: 'Clasa curentă'
         suffix: 'Paralela'

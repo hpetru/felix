@@ -160,7 +160,7 @@ namespace :load do
         address = upsert_record!(
           Address,
           city: city,
-          street: student['address_city']
+          street: student['address_street']
         )
       end
 
@@ -211,7 +211,9 @@ namespace :load do
               'father_first_name',
               'born_at',
               'mother_email',
-              'father_email'
+              'father_email',
+              'address_house',
+              'address_appartment'
             ]
           )
         )
