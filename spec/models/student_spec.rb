@@ -9,7 +9,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  came_at             :date
-#  idnp                :string
+#  idnp_token          :string
 #  address_id          :integer
 #  address_house       :string
 #  address_appartment  :string
@@ -22,7 +22,7 @@
 #  mother_email        :string
 #  gender              :string           not null
 #  inside_code_token   :string           not null
-#  birthday            :date
+#  born_at             :date             not null
 #  father_email        :string
 #  foreign_language_id :integer
 #  came_from_id        :integer
@@ -42,6 +42,7 @@ describe Student do
   it { should validate_presence_of :inside_code_token }
   it { should validate_presence_of :nationality }
   it { should validate_presence_of :gender }
+  it { should validate_presence_of :born_at }
   it { should belong_to :nationality }
   it { should belong_to :foreign_language }
   it { should belong_to :student_group }
