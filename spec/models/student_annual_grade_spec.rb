@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: student_anual_grades
+# Table name: student_annual_grades
 #
 #  id         :integer          not null, primary key
 #  subject_id :integer          not null

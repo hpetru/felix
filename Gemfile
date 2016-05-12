@@ -21,6 +21,8 @@ gem 'simple_form'
 gem 'browserify-rails'
 gem 'react-rails'
 gem 'timecop'
+gem 'select2-rails'
+gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
 
 group :development, :test do
   gem 'byebug'
