@@ -20,7 +20,8 @@ ActiveAdmin.register Student do
     :mother_phone_number,
     :gender,
     :foreign_language_id,
-    :born_at
+    :born_at,
+    :inside_code_token
   )
 
   menu label: 'Elevi', priority: 1
@@ -68,6 +69,7 @@ ActiveAdmin.register Student do
     end
 
     f.inputs 'Informație clasă' do
+      f.input :inside_code_token
       f.input :came_from,
         input_html: { class: 'select2able' }
       f.input :came_at, as: :datepicker,
