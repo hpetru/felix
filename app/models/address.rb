@@ -16,4 +16,8 @@ class Address < ActiveRecord::Base
     presence: true
   )
   belongs_to :city
+
+  def display_name
+    "#{city.name} - #{street}"
+  end
 end

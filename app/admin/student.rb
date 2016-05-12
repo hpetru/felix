@@ -1,5 +1,10 @@
 ActiveAdmin.register Student do
-  permit_params :first_name, :last_name, :student_group_id
+  permit_params(
+    :first_name,
+    :last_name,
+    :student_group_id,
+  )
+
   menu label: 'Elevi', priority: 1
 
   filter :last_name
@@ -10,7 +15,7 @@ ActiveAdmin.register Student do
   filter :nationality, as: :select
   filter :gender, as: :select, collection: [['Băieți', 'male'], ['Fete', 'female']]
   filter :came_from, as: :select,
-    input_html: {class: 'select2able'},
+    input_html: { class: 'select2able' },
     collection: Institution.joins(:students).uniq(:name).order(:name)
 
   index title: 'Elevi' do
@@ -29,5 +34,54 @@ ActiveAdmin.register Student do
       row :student_group
       row :main_teacher
     end
+  end
+
+  form do |f|
+    f.inputs 'Date generale' do
+      f.input :last_name
+      f.input :first_name
+      f.input :born_at, as: :datepicker,
+        input_html: { placeholder: '1994-02-29' }
+      f.input :gender, as: :select,
+        include_blank: false
+      f.input :idnp_token
+      f.input :nationality, as: :select,
+        include_blank: false
+    end
+
+    f.inputs 'Informație clasă' do
+      f.input :came_from,
+        input_html: { class: 'select2able' }
+      f.input :came_at, as: :datepicker,
+        input_html: { placeholder: '2016-01-01' }
+      f.input :foreign_language
+      f.input :student_group, as: :select,
+        include_blank: false,
+        input_html: { class: 'select2able' }
+    end
+
+    f.inputs 'Adresa' do
+      f.input :address,
+        label_method: :display_name,
+        input_html: { class: 'select2able' }
+      f.input :address_house
+      f.input :address_appartment
+    end
+
+    f.inputs 'Informație tată' do
+      f.input :father_last_name
+      f.input :father_first_name
+      f.input :father_phone_number
+      f.input :father_email
+    end
+
+    f.inputs 'Informație mamă' do
+      f.input :mother_last_name
+      f.input :mother_first_name
+      f.input :mother_phone_number
+      f.input :mother_email
+    end
+
+    actions
   end
 end

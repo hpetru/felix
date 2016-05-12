@@ -9,7 +9,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  came_at             :date
-#  idnp                :string
+#  idnp_token          :string
 #  address_id          :integer
 #  address_house       :string
 #  address_appartment  :string
@@ -22,7 +22,7 @@
 #  mother_email        :string
 #  gender              :string           not null
 #  inside_code_token   :string           not null
-#  birthday            :date
+#  born_at             :date             not null
 #  father_email        :string
 #  foreign_language_id :integer
 #  came_from_id        :integer
@@ -45,6 +45,7 @@ class Student < ActiveRecord::Base
     :student_group,
     :inside_code_token,
     :nationality,
+    :born_at,
     :gender,
     presence: true
   )
