@@ -19,7 +19,8 @@ ActiveAdmin.register Student do
     :mother_email,
     :mother_phone_number,
     :gender,
-    :foreign_language_id
+    :foreign_language_id,
+    :born_at
   )
 
   menu label: 'Elevi', priority: 1
