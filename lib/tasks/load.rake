@@ -209,7 +209,7 @@ namespace :load do
               'mother_first_name',
               'father_last_name',
               'father_first_name',
-              'birthday',
+              'born_at',
               'mother_email',
               'father_email'
             ]
