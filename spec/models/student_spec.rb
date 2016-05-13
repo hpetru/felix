@@ -63,4 +63,16 @@ describe Student do
       )
     end
   end
+
+  describe '#age' do
+    it do
+      student = described_class.new(
+        born_at: Date.parse('1996-07-15')
+      )
+      new_time = Time.local(2016, 07, 16, 12, 0, 0)
+      Timecop.freeze(new_time)
+
+      expect(student.age).to eq 20
+    end
+  end
 end

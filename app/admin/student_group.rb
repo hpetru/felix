@@ -12,6 +12,19 @@ ActiveAdmin.register StudentGroup do
   end
 
   show title: ->(group) { "Clasa #{group}" } do |group|
+    panel 'Studenți' do
+      table_for group.students, sortable: true do
+        column 'Nume student' do |student|
+          a student.full_name, href: admin_student_path(student)
+        end
+        column :gender
+        column :age
+        column :foreign_language
+      end
+    end
+  end
+
+  sidebar 'Detalii', only: :show do
     attributes_table do
       row :promotion
       row :current_grade
@@ -19,14 +32,6 @@ ActiveAdmin.register StudentGroup do
       row :profile_slug
       row :main_teacher
       row :students_count
-    end
-
-    panel 'Studenți' do
-      table_for group.students, sortable: true do
-        column 'Nume student' do |student|
-          a student.full_name, href: admin_student_path(student)
-        end
-      end
     end
   end
 

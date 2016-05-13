@@ -69,6 +69,7 @@ ro:
         gender: 'Gen'
         inside_code_token: 'Codul intern'
         born_at: 'Data nașterii'
+        idnp_token: 'IDNP'
       student_group:
         current_grade: 'Clasa curentă'
         suffix: 'Paralela'

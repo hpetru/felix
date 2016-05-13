@@ -63,6 +63,11 @@ class Student < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
-
   alias :to_s :full_name
+
+  def age
+    now = Date.current
+    delta = born_at.change(year: now.year) > now ? 1 : 0
+    now.year - born_at.year - delta
+  end
 end

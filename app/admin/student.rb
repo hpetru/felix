@@ -50,23 +50,39 @@ ActiveAdmin.register Student do
   end
 
   show title: ->(student) { "Student - #{student}" } do
-    attributes_table do
+    panel 'Note' do
+      h1 'Aici va fi plasat tabelul dinamic cu note'
+    end
+  end
+
+  sidebar 'Date generale', only: :show do
+    attributes_table_for student do
       row :first_name
       row :last_name
+      row :gender
+      row :born_at
+      row :idnp_token
       row :student_group
       row :main_teacher
       row :foreign_language
-      row :born_at
-      row :gender
       row :email
-      row :idnp_token
       row :address
       row :address_house
       row :address_appartment
+    end
+  end
+
+  sidebar 'Informație mamă', only: :show do
+    attributes_table_for student do
       row :mother_first_name
       row :mother_last_name
       row :mother_phone_number
       row :mother_email
+    end
+  end
+
+  sidebar 'Informație tată', only: :show do
+    attributes_table_for student do
       row :father_first_name
       row :father_last_name
       row :father_phone_number

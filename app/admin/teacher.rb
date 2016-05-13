@@ -36,27 +36,37 @@ ActiveAdmin.register Teacher do
   end
 
   show title: ->(teacher) { "Profesor - #{teacher.full_name}" } do
-    attributes_table do
-      row :first_name
-      row :last_name
-      row :student_groups do
-        teacher.student_groups.order(:promotion, :suffix).map do |group|
-          link_to group.display, admin_student_group_path(group)
-        end
+    panel 'Date generale' do
+      attributes_table_for teacher do
+        row :first_name
+        row :last_name
+        row :birthday
+        row :idnp_token
       end
-      row :subjects do
-        teacher.subjects.order(:name).map do |subject|
-          subject.name
+    end
+
+    panel 'Date profesionale' do
+      attributes_table_for teacher do
+        row :subjects do
+          teacher.subjects.order(:name).map do |subject|
+            link_to subject.name, admin_subject_path(subject)
+          end
         end
+
+        row :student_groups do
+          teacher.student_groups.order(:promotion, :suffix).map do |group|
+            link_to group.display, admin_student_group_path(group)
+          end
+        end
+
+        row :retired
+        row :syndicate_member
+        row :phone
+
+        row :graduated_from
+        row :show_degree
+        row :degree_reeval_year
       end
-      row :birthday
-      row :retired
-      row :syndicate_member
-      row :phone
-      row :idnp_token
-      row :graduated_from
-      row :show_degree
-      row :degree_reeval_year
     end
   end
 end
