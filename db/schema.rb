@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512121650) do
+ActiveRecord::Schema.define(version: 20160517110446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20160512121650) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "student_annual_grades", ["student_id", "year", "subject_id"], name: "student_annual_grades_uniqueness", unique: true, using: :btree
+
   create_table "student_groups", force: :cascade do |t|
     t.integer  "promotion",       null: false
     t.string   "suffix",          null: false
@@ -88,6 +90,8 @@ ActiveRecord::Schema.define(version: 20160512121650) do
     t.integer  "semester_id", null: false
   end
 
+  add_index "student_semester_grades", ["student_id", "semester_id", "subject_id"], name: "student_semester_grades_uniqueness", unique: true, using: :btree
+
   create_table "student_thesis_grades", force: :cascade do |t|
     t.integer  "student_id",  null: false
     t.integer  "value",       null: false
@@ -96,6 +100,8 @@ ActiveRecord::Schema.define(version: 20160512121650) do
     t.datetime "updated_at",  null: false
     t.integer  "semester_id", null: false
   end
+
+  add_index "student_thesis_grades", ["student_id", "semester_id", "subject_id"], name: "student_thesis_grades_uniqueness", unique: true, using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name",          null: false

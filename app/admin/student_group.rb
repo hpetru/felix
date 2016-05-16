@@ -22,6 +22,10 @@ ActiveAdmin.register StudentGroup do
         column :foreign_language
       end
     end
+
+    panel 'Note' do
+      render 'grades_table'
+    end
   end
 
   sidebar 'Detalii', only: :show do
