@@ -32,8 +32,10 @@ namespace :load do
     Hash[hash.select { |key, _| keys.include? key }]
   end
 
-  def year_from_grade(grade)
-    study_year = Date.today.month > 8 ? Date.today.year : Date.today.year - 1
+  def year_from_grade(grade, study_year=nil)
+    if study_year.nil?
+      study_year = Date.today.month > 8 ? Date.today.year : Date.today.year - 1
+    end
     study_year - grade + 1
   end
 
@@ -218,6 +220,58 @@ namespace :load do
           )
         )
       )
+    end
+  end
+
+  task grades: :setup_logger do
+    def is_float?(fl)
+      !!Float(fl) rescue false
+    end
+
+    filepath = 'tmp/csvs/grades.csv'
+    csv_foreach filepath do |row|
+      study_year = row["study_year"].to_i # clasa
+      year = row["year"].to_i             # anul de studii
+      student = Student.joins(:student_group).find_by(
+        first_name: row["first_name"],
+        last_name: row["last_name"],
+        student_groups: {
+          promotion: year_from_grade(study_year, row["year"].to_i)
+        }
+      )
+
+      next if !student || !row["grade_type"].include?('Sem')
+      semester_type = row["grade_type"] == 'Sem I' ? :first_semester : :second_semester
+      semester = Semester.find_by!(semester_type: semester_type, year: year)
+      grades = row.to_hash.except(
+        "first_name",
+        "last_name",
+        "study_year",
+        "suffix",
+        "year",
+        "grade_type",
+        "average"
+      )
+
+      grades.each do |subject_name, value|
+        subject = Subject.find_by(name: subject_name)
+        next if !subject || !is_float?(value)
+
+        upsert_record!(
+          StudentSemesterGrade,
+          {
+            student: student,
+            semester: semester,
+            subject: subject,
+          },
+          {
+            value: value.to_f,
+            student: student,
+            semester: semester,
+            subject: subject
+          }
+        )
+      end
     end
   end
 end

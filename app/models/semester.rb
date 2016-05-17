@@ -16,7 +16,7 @@ class Semester < ActiveRecord::Base
   }
 
   validates(
-    :year,
+    :study_year,
     :semester_type,
     presence: true
   )

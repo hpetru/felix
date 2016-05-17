@@ -114,4 +114,9 @@ FactoryGirl.define do
     sequence(:email) { |n| "me#{n}@example.com" }
     password '1' * 10
   end
+
+  factory :semester do
+    study_year 2013
+    semester_type :first_semester
+  end
 end

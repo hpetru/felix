@@ -12,3 +12,15 @@ User.create!(
   email: 'grigore.vasilache@gmail.com',
   password: 'grigore.vasilache@gmail.com'
 )
+
+(2000..2025).each do |year|
+  Semester.create!(
+    year: year,
+    semester_type: :first_semester
+  )
+
+  Semester.create!(
+    year: year,
+    semester_type: :second_semester
+  )
+end
