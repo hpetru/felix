@@ -34,11 +34,6 @@
 #
 
 class Student < ActiveRecord::Base
-  enum gender: {
-    male: 'male',
-    female: 'female'
-  }
-
   validates(
     :first_name,
     :last_name,
@@ -50,6 +45,30 @@ class Student < ActiveRecord::Base
     presence: true
   )
 
+  validates(
+    :first_name,
+    :last_name,
+    length: {
+      minimum: 3,
+      maximum: 20,
+    },
+    format: {
+      with: /\A[^0-9`!@#\$%\^&*+_=]+\z/
+    }
+  )
+
+  validates(
+    :idnp_token,
+    allow_blank: true,
+    length: {
+      minimum: 13,
+      maximum: 13,
+    },
+    format: {
+      with: /\d*/
+    }
+  )
+
   belongs_to :nationality
   belongs_to :student_group
   belongs_to :address
@@ -57,14 +76,38 @@ class Student < ActiveRecord::Base
   belongs_to :foreign_language, class_name: Subject
   delegate :main_teacher, to: :student_group
 
+  def self.current
+    joins(:student_group).where(
+      '? - promotion + 1 <= 12',
+      StudentGroup.current_study_year
+    )
+  end
+
+  def self.graduate
+    joins(:student_group).where(
+      '? - promotion + 1 > 12',
+      StudentGroup.current_study_year
+    )
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
+
   alias :to_s :full_name
 
   def age
     now = Date.current
     delta = born_at.change(year: now.year) > now ? 1 : 0
     now.year - born_at.year - delta
+  end
+
+  def gender_display
+    I18n.t gender, scope: [
+      :activerecord,
+      :values,
+      :student,
+      :gender
+    ]
   end
 end

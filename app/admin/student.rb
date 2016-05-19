@@ -1,5 +1,12 @@
 ActiveAdmin.register Student do
-  config.sort_order = ['last_name_asc', 'first_name_asc', 'born_at_desc']
+  scope 'Elevi curenți', :current, default: true
+  scope 'Absolvenți', :graduate
+  config.sort_order = %w(
+    last_name_asc
+    first_name_asc
+    born_at_desc
+  ).join('_and_')
+
   permit_params(
     :first_name,
     :last_name,
@@ -26,6 +33,12 @@ ActiveAdmin.register Student do
     :inside_code_token
   )
 
+  controller do
+    def scoped_collection
+      Student.includes(:student_group)
+    end
+  end
+
   menu label: 'Elevi', priority: 1
 
   filter :last_name
@@ -43,10 +56,15 @@ ActiveAdmin.register Student do
     column :inside_code_token
     column :last_name
     column :first_name
-    column :student_group,
-      sortable: 'student_group.promotion, student_group.suffix'
+    column :student_group, sortable: 'student_groups.promotion'
     column :born_at
-    actions
+
+    actions defaults: false do |student|
+      link_to 'Vizualizare', admin_student_path(student)
+    end
+    actions defaults: false do |student|
+      link_to 'Editare', edit_admin_student_path(student)
+    end
   end
 
   show title: ->(student) { "Student - #{student}" } do
@@ -59,14 +77,16 @@ ActiveAdmin.register Student do
     attributes_table_for student do
       row :first_name
       row :last_name
-      row :gender
+      row :gender_display
       row :born_at
       row :idnp_token
       row :student_group
       row :main_teacher
       row :foreign_language
       row :email
-      row :address
+      row :address do
+        resource.address.display
+      end
       row :address_house
       row :address_appartment
     end
@@ -109,16 +129,22 @@ ActiveAdmin.register Student do
         input_html: { class: 'select2able' }
       f.input :came_at, as: :datepicker,
         input_html: { placeholder: '2016-01-01' }
-      f.input :foreign_language
+      f.input :foreign_language, # TODO: Fix this hardcode
+        collection: [
+          Subject.find_by(
+            name: 'Limba franceză'
+          ),
+          Subject.find_by(
+            name: 'Limba germană'
+          )
+        ]
       f.input :student_group, as: :select,
         include_blank: false,
         input_html: { class: 'select2able' }
     end
 
     f.inputs 'Adresa' do
-      f.input :address,
-        label_method: :display_name,
-        input_html: { class: 'select2able' }
+      f.input :address, input_html: { class: 'select2able' }
       f.input :address_house
       f.input :address_appartment
     end
@@ -137,6 +163,9 @@ ActiveAdmin.register Student do
       f.input :mother_email
     end
 
-    actions
+    f.actions do
+      f.submit 'Salvează elev'
+      f.cancel_link
+    end
   end
 end

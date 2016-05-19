@@ -10,4 +10,8 @@
 
 class Subject < ActiveRecord::Base
   validates :name, presence: true
+
+  def self.all_as_selectable
+    all.map { |x| [x.name, x.id] }
+  end
 end

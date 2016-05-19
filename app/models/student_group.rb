@@ -30,7 +30,11 @@ class StudentGroup < ActiveRecord::Base
   has_many :students
 
   def current_grade
-    current_study_year - promotion + 1
+    self.class.current_study_year - promotion + 1
+  end
+
+  def current_grade_safe
+    current_grade <= 12 ? current_grade : '[A] 12'
   end
 
   def students_count
@@ -38,16 +42,37 @@ class StudentGroup < ActiveRecord::Base
   end
 
   def to_s
-    "#{current_grade} #{suffix} - #{main_teacher.full_name}"
+    "#{current_grade_safe} #{suffix} - #{main_teacher.full_name}"
   end
 
   def display
-    "#{current_grade} #{suffix}"
+    "#{current_grade_safe} #{suffix}"
   end
 
-  private
+  def profile_display
+    I18n.t profile_slug, scope: [
+      :activerecord,
+      :values,
+      :student_group,
+      :profile_slug
+    ]
+  end
 
-  def current_study_year
+  def self.current
+    where(
+      '? - promotion + 1 <= 12',
+      current_study_year
+    )
+  end
+
+  def self.graduate
+    where(
+      '? - promotion + 1 > 12',
+      current_study_year
+    )
+  end
+
+  def self.current_study_year
     if Date.today.month > 8
       Date.today.year
     else

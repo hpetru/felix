@@ -32,6 +32,16 @@ describe StudentGroup do
     end
   end
 
+  describe '#current_grade_safe' do
+    it do
+      new_time = Time.local(2016, 9, 1, 12, 0, 0)
+      Timecop.freeze(new_time)
+      group = described_class.new(promotion: 2002)
+
+      expect(group.current_grade_safe).to eq('[A] 12')
+    end
+  end
+
   describe '#to_s' do
     it do
       main_teacher = create(:teacher)
@@ -55,6 +65,20 @@ describe StudentGroup do
         and_return(9)
 
       expect(group.display).to eq("9 A")
+    end
+  end
+
+  describe '#profile_display' do
+    it do
+      group = described_class.new(profile_slug: 'humanitarian')
+      expect(group.profile_display).to eq(
+        I18n.t group.profile_slug, scope: [
+          :activerecord,
+          :values,
+          :student_group,
+          :profile_slug
+        ]
+      )
     end
   end
 end

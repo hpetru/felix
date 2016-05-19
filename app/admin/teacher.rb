@@ -1,6 +1,21 @@
 ActiveAdmin.register Teacher do
-  config.sort_order = ['last_name_asc', 'first_name_asc', 'birthday_desc']
+  config.sort_order = %w(
+    last_name_asc
+    first_name_asc
+    birthday_desc
+  ).join('_and_')
+
   menu label: 'Profesori', priority: 3
+  permit_params(
+    :first_name,
+    :last_name,
+    :birthday,
+    :syndicate_member,
+    :retired,
+    :phone,
+    :gender,
+    subject_ids: []
+  )
 
   filter :last_name
   filter :first_name
@@ -27,12 +42,18 @@ ActiveAdmin.register Teacher do
     column :student_groups do |teacher|
       teacher.student_groups.order(:promotion, :suffix).map do |group|
         link_to group.display, admin_student_group_path(group)
-      end
+      end.join('; ').html_safe
     end
     column :subjects do |teacher|
-      teacher.subjects.order(:name).map(&:name)
+      teacher.subjects.order(:name).map(&:name).join('; ')
     end
-    actions
+
+    actions defaults: false do |teacher|
+      link_to 'Vizualizare', admin_teacher_path(teacher)
+    end
+    actions defaults: false do |teacher|
+      link_to 'Editare', edit_admin_teacher_path(teacher)
+    end
   end
 
   show title: ->(teacher) { "Profesor - #{teacher.full_name}" } do
@@ -48,15 +69,13 @@ ActiveAdmin.register Teacher do
     panel 'Date profesionale' do
       attributes_table_for teacher do
         row :subjects do
-          teacher.subjects.order(:name).map do |subject|
-            link_to subject.name, admin_subject_path(subject)
-          end
+          teacher.subjects.order(:name).map(&:name).join('; ')
         end
 
         row :student_groups do
           teacher.student_groups.order(:promotion, :suffix).map do |group|
             link_to group.display, admin_student_group_path(group)
-          end
+          end.join('; ').html_safe
         end
 
         row :retired
@@ -64,8 +83,38 @@ ActiveAdmin.register Teacher do
         row :phone
 
         row :graduated_from
-        row :show_degree
+        row :degree_display
         row :degree_reeval_year
+      end
+    end
+  end
+
+  form do |f|
+    f.inputs 'Date generale' do
+      f.input :last_name
+      f.input :first_name
+      f.input :birthday, as: :datepicker,
+        input_html: { placeholder: '1994-02-29' }
+      f.input :gender, as: :select,
+        include_blank: false, collection: [['M', 'male'], ['F', 'female']]
+      f.input :phone
+      f.input :subject_ids, as: :select, multiple: true,
+        collection: Subject.all_as_selectable,
+        input_html: { style: 'height: 200px;' }
+      f.input :degree, as: :select, collection: [
+        ['Doctorat', 'doctorate'],
+        ['Superior', 'superior_degree'],
+        ['Gardul I', 'first_degree'],
+        ['Gardul II', 'second_degree'],
+        ['Gardul III', 'third_degree'],
+      ]
+
+      f.input :retired, as: :boolean
+      f.input :syndicate_member, as: :boolean
+
+      f.actions do
+        f.submit 'Salvează profesor'
+        f.cancel_link
       end
     end
   end

@@ -47,6 +47,15 @@ describe Student do
   it { should belong_to :foreign_language }
   it { should belong_to :student_group }
   it { should belong_to :came_from }
+  it { should validate_length_of(:first_name).is_at_least(3) }
+  it { should validate_length_of(:first_name).is_at_most(20) }
+  it { should validate_length_of(:last_name).is_at_least(3) }
+  it { should validate_length_of(:last_name).is_at_most(20) }
+  it { should validate_length_of(:idnp_token).is_at_least(13) }
+  it { should validate_length_of(:idnp_token).is_at_most(13) }
+  it { should_not allow_value('Dorin32;').for(:first_name) }
+  it { should_not allow_value('Mih3io4j_&d,').for(:last_name) }
+  it { should_not allow_value('8923983jska').for(:idnp_token) }
 
   describe '#full_name' do
     it do
@@ -70,6 +79,20 @@ describe Student do
       Timecop.freeze(new_time)
 
       expect(student.age).to eq 20
+    end
+  end
+
+  describe '#gender_display' do
+    it do
+      student = create(:student)
+      expect(student.gender_display).to eq(
+        I18n.t student.gender, scope: [
+          :activerecord,
+          :values,
+          :student,
+          :gender
+        ]
+      )
     end
   end
 end

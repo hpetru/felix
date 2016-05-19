@@ -16,13 +16,10 @@ class Address < ActiveRecord::Base
     presence: true
   )
 
-  def to_s
-    "#{city.name} - #{street}"
-  end
-
   belongs_to :city
+  accepts_nested_attributes_for :city
 
-  def display_name
-    "#{city.name} - #{street}"
+  def display
+    "#{city.name} - str. #{street}"
   end
 end

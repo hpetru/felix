@@ -21,10 +21,10 @@
 class Teacher < ActiveRecord::Base
   enum degree: {
     doctorate: 'doctorate',
+    superior_degree: 'superior_degree',
     first_degree: 'first_degree',
     second_degree: 'second_degree',
-    third_degree: 'third_degree',
-    superior_degree: 'superior_degree'
+    third_degree: 'third_degree'
   }
   enum gender: {
     male: 'male',
@@ -34,9 +34,22 @@ class Teacher < ActiveRecord::Base
   validates(
     :first_name,
     :last_name,
+    length: {
+      minimum: 3,
+      maximum: 20,
+    },
+    format: {
+      with: /\A[^0-9`!@#\$%\^&*+_=]+\z/
+    }
+  )
+
+  validates(
+    :first_name,
+    :last_name,
     :birthday,
     presence: true
   )
+
   has_and_belongs_to_many :subjects
   has_many :teaching_subjects
   has_many :student_groups, foreign_key: :main_teacher_id, class_name: StudentGroup
@@ -47,14 +60,13 @@ class Teacher < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def show_degree
-    {
-      doctorate: 'Doctorat',
-      superior_degree: 'Superior',
-      first_degree: 'Gradul I',
-      second_degree: 'Gradul II',
-      third_degree: 'Gradul III'
-    }[degree.to_sym]
+  def degree_display
+    I18n.t degree, scope: [
+      :activerecord,
+      :values,
+      :teacher,
+      :degree
+    ]
   end
 
   alias :to_s :full_name
