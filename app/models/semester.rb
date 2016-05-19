@@ -20,7 +20,4 @@ class Semester < ActiveRecord::Base
     :semester_type,
     presence: true
   )
-
-  has_many :student_thesis_grades
-  has_many :student_semester_grades
 end

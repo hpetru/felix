@@ -65,8 +65,9 @@ FactoryGirl.define do
     semester_type 'first_semester'
   end
 
-  factory :student_semester_grade do
+  factory :student_grade do
     value 9
+    grade_type 'semester'
     association(
       :student,
       factory: :student
@@ -78,35 +79,6 @@ FactoryGirl.define do
     association(
       :semester,
       factory: :semester
-    )
-  end
-
-  factory :student_thesis_grade do
-    value 9
-    association(
-      :student,
-      factory: :student
-    )
-    association(
-      :subject,
-      factory: :subject
-    )
-    association(
-      :semester,
-      factory: :semester
-    )
-  end
-
-  factory :student_annual_grade do
-    value 9.5
-    year 2015
-    association(
-      :student,
-      factory: :student
-    )
-    association(
-      :subject,
-      factory: :subject
     )
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517110446) do
+ActiveRecord::Schema.define(version: 20160519141520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,16 +61,15 @@ ActiveRecord::Schema.define(version: 20160517110446) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "student_annual_grades", force: :cascade do |t|
-    t.integer  "subject_id", null: false
-    t.float    "value",      null: false
-    t.integer  "year",       null: false
-    t.integer  "student_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "student_grades", force: :cascade do |t|
+    t.float    "value",       null: false
+    t.string   "grade_type",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "student_id",  null: false
+    t.integer  "semester_id", null: false
+    t.integer  "subject_id",  null: false
   end
-
-  add_index "student_annual_grades", ["student_id", "year", "subject_id"], name: "student_annual_grades_uniqueness", unique: true, using: :btree
 
   create_table "student_groups", force: :cascade do |t|
     t.integer  "promotion",       null: false
@@ -80,28 +79,6 @@ ActiveRecord::Schema.define(version: 20160517110446) do
     t.datetime "updated_at",      null: false
     t.integer  "main_teacher_id", null: false
   end
-
-  create_table "student_semester_grades", force: :cascade do |t|
-    t.float    "value",       null: false
-    t.integer  "subject_id",  null: false
-    t.integer  "student_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "semester_id", null: false
-  end
-
-  add_index "student_semester_grades", ["student_id", "semester_id", "subject_id"], name: "student_semester_grades_uniqueness", unique: true, using: :btree
-
-  create_table "student_thesis_grades", force: :cascade do |t|
-    t.integer  "student_id",  null: false
-    t.integer  "value",       null: false
-    t.integer  "subject_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "semester_id", null: false
-  end
-
-  add_index "student_thesis_grades", ["student_id", "semester_id", "subject_id"], name: "student_thesis_grades_uniqueness", unique: true, using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name",          null: false
@@ -185,5 +162,8 @@ ActiveRecord::Schema.define(version: 20160517110446) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "student_grades", "semesters"
+  add_foreign_key "student_grades", "students"
+  add_foreign_key "student_grades", "subjects"
   add_foreign_key "students", "student_groups"
 end
