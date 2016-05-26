@@ -240,8 +240,11 @@ namespace :load do
         }
       )
 
-      next if !student || !row["grade_type"].include?('Sem')
-      semester_type = row["grade_type"] == 'Sem I' ? :first_semester : :second_semester
+      next if !student || !(
+        row["grade_type"].include?("Sem") || row["grade_type"].include?("Teza")
+      )
+      grade_type = row["grade_type"].include?('Sem') ? 'semester' : 'thesis'
+      semester_type = row["grade_type"].include?('II') ? :second_semester : :first_semester
       semester = Semester.find_by!(semester_type: semester_type, year: year)
       grades = row.to_hash.except(
         "first_name",
@@ -256,15 +259,15 @@ namespace :load do
       grades.each do |subject_name, value|
         subject = Subject.find_by(name: subject_name)
         next if !subject || !is_float?(value)
-
         upsert_record!(
-          StudentSemesterGrade,
+          StudentGrade,
           {
             student: student,
             semester: semester,
             subject: subject,
           },
           {
+            grade_type: grade_type,
             value: value.to_f,
             student: student,
             semester: semester,
