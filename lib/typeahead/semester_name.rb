@@ -31,14 +31,17 @@ module Typeahead
     private
 
     def semesters
-      Semester.where(
-        year: year,
-        semester_type: semester_type
-      )
+      relation = Semester.where(year: year)
+      unless query.empty?
+        relation = relation.where(
+          semester_type: semester_type
+        )
+      end
+      relation
     end
 
     def semester_type
-      SEMESTER_MAPPING[query]
+      SEMESTER_MAPPING[query.upcase]
     end
 
     def year

@@ -1,7 +1,8 @@
 module Typeahead
   STRATEGIES = [
     Typeahead::SubjectName,
-    Typeahead::SemesterName
+    Typeahead::SemesterName,
+    Typeahead::SemesterYear
   ].freeze
 
   def self.new_strategy(strategy_slug, strategy_inputs)

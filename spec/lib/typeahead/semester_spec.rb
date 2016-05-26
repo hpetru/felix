@@ -40,5 +40,31 @@ describe Typeahead::SemesterName do
         ]
       )
     end
+
+    it do
+      semesters = [
+        create(:semester, year: 2015, semester_type: 'first_semester'),
+        create(:semester, year: 2015, semester_type: 'second_semester'),
+        create(:semester, year: 2013, semester_type: 'first_semester'),
+      ]
+      strategy_inputs = {
+        'query' => '',
+        'year' => 2015
+      }
+      strategy = described_class.new(strategy_inputs)
+
+      expect(strategy.strategy_data).to eq(
+        [
+          {
+            value: semesters[0].id,
+            label: semesters[0].display_label
+          },
+          {
+            value: semesters[1].id,
+            label: semesters[1].display_label
+          }
+        ]
+      )
+    end
   end
 end

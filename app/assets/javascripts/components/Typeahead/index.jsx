@@ -32,6 +32,10 @@ class Typeahead extends React.Component {
   }
 
   updateSelect(value) {
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+
     this.setState({ value });
   }
 
@@ -40,7 +44,7 @@ class Typeahead extends React.Component {
       <Select.Async
         name={this.props.name}
         value={this.state.value}
-        change={this.updateSelect}
+        onChange={this.updateSelect}
         loadOptions={this.getOptions}
       />
     );
@@ -51,6 +55,7 @@ Typeahead.propTypes = {
   strategySlug: React.PropTypes.string.isRequired,
   strategyInputs: React.PropTypes.object,
   name: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func,
 };
 
 Typeahead.defaultProps = {

@@ -10,7 +10,6 @@ function columnFetcher({ columnStrategySlug, tableStrategySlug, onSuccess, strat
     strategy_inputs: strategyInputs,
   };
 
-
   $.ajax({
     url,
     method,

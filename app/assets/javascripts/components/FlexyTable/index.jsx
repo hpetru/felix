@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'underscore';
 import Thead from './Thead.jsx';
 import Tbody from './Tbody.jsx';
+import ControlBar from './ControlBar/index.jsx';
 import tableFetcher from './ajax/tableFetcher.js';
 import columnFetcher from './ajax/columnFetcher.js';
 import immutable from 'seamless-immutable';
@@ -40,6 +41,7 @@ class FlexyTable extends React.Component {
     }
   }
 
+  // TODO: Should be rewrited ASAP
   loadTable() {
     tableFetcher({
       id: 1,
@@ -110,6 +112,11 @@ class FlexyTable extends React.Component {
   render() {
     return (
       <div className="flexy-table">
+        <ControlBar
+          addColumnCallback={this.addColumn}
+          tableStrategySlug={this.props.tableStrategySlug}
+          columnInputSettings={this.props.columnInputSettings}
+        />
         <table className="table table-striped">
           <Thead
             columns={this.state.columns}
@@ -126,10 +133,12 @@ class FlexyTable extends React.Component {
 
 FlexyTable.propTypes = {
   tableStrategySlug: React.PropTypes.string.isRequired,
-}
+  columnInputSettings: React.PropTypes.object,
+};
 
 FlexyTable.defaultProps = {
-  defaultColumns: []
-}
+  defaultColumns: [],
+  columnInputSettings: {},
+};
 
 module.exports = immutableRenderDecorator(FlexyTable);
