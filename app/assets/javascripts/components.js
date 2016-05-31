@@ -6,4 +6,5 @@ const ReactDOM = window.ReactDOM = require('react-dom');
 const app = window.app = {
   MyTest: require('./components/MyTest.jsx'),
   FlexyTable: require('./components/FlexyTable/index.jsx'),
+  Typeahead: require('./components/Typeahead/index.jsx'),
 };

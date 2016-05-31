@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v0 do
+      get 'typeahead', to: 'typeahead#index'
       get 'flexy_table', to: 'flexy_table#index'
     end
   end
