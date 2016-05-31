@@ -10,6 +10,11 @@
 #
 
 class Semester < ActiveRecord::Base
+  SEMESTER_MAPPING = {
+    'first_semester' => 'I',
+    'second_semester' => 'II'
+  }
+
   enum semester_type: {
     first_semester: 'first_semester',
     second_semester: 'second_semester'
@@ -20,4 +25,12 @@ class Semester < ActiveRecord::Base
     :semester_type,
     presence: true
   )
+
+  def display_label
+    semester = SEMESTER_MAPPING.fetch(
+      semester_type
+    )
+
+    "#{year} - #{semester}"
+  end
 end
