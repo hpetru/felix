@@ -49,6 +49,7 @@ describe FlexyTable::Grades::StudentSubjectGrade do
     it do
       grade_type = 'thesis'
       subject = create(:subject)
+      subject_2 = create(:subject)
       student_group = create(:student_group)
       semester = create(:semester)
       students = [
@@ -88,6 +89,14 @@ describe FlexyTable::Grades::StudentSubjectGrade do
         semester: semester,
         grade_type: 'semester',
         value: 9.5
+      )
+      create(
+        :student_grade,
+        subject: subject_2,
+        student: students[0],
+        semester: semester,
+        grade_type: grade_type,
+        value: 9.7
       )
       strategy = described_class.new(
         'subject_id' => subject.id,
