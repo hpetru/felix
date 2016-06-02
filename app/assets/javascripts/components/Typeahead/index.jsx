@@ -8,7 +8,6 @@ class Typeahead extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
     this.updateSelect = this.updateSelect.bind(this);
     this.getOptions = this.getOptions.bind(this);
   }
@@ -42,6 +41,7 @@ class Typeahead extends React.Component {
   render() {
     return (
       <Select.Async
+        placeholder={ this.props.placeholder || 'Alege'}
         name={this.props.name}
         value={this.state.value}
         onChange={this.updateSelect}

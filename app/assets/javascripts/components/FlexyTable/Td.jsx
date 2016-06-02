@@ -3,7 +3,7 @@ import React from 'react';
 class Td extends React.Component {
   render() {
     return (
-      <td>
+      <td className="col">
         {this.props.value}
       </td>
     )

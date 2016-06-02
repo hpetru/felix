@@ -96,11 +96,13 @@ class StudentSubjectGrade extends React.Component {
     return (
       <div>
         <Typeahead
+          placeholder="Alege materia"
           name="subject_name"
           strategySlug="subject_name"
           onChange={this.updateSubject}
         />
         <Typeahead
+          placeholder="Alege semestrul"
           name="semester_name"
           strategySlug="semester_name"
           strategyInputs={{ year: this.props.settings.year }}

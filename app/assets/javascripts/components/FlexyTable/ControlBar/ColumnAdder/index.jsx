@@ -63,13 +63,16 @@ class ColumnAdder extends React.Component {
       <div>
         <h3>Adaugă coloană</h3>
         <form onSubmit={this.addColumn}>
-          <Select
-            clearable
-            searchable
-            value={this.state.columnStrategy}
-            options={columnInputOptions[this.props.tableStrategySlug]}
-            onChange={this.updateColumnStrategy}
-          />
+          <div className="form-group">
+            <Select
+              clearable
+              searchable
+              placeholder='Alege'
+              value={this.state.columnStrategy}
+              options={columnInputOptions[this.props.tableStrategySlug]}
+              onChange={this.updateColumnStrategy}
+            />
+          </div>
           <ColumnInput
             inputType={this.columnStrategyInputType()}
             onUpdateStrategyInputs={this.updateColumnStrategyInputs}

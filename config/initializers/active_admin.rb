@@ -184,7 +184,6 @@ ActiveAdmin.setup do |config|
   # We recommend using the built in Active Admin layout and loading
   # up your own stylesheets / javascripts to customize the look
   # and feel.
-  #
   # To load a stylesheet:
   #   config.register_stylesheet 'my_stylesheet.css'
   #
