@@ -64,26 +64,33 @@ class ColumnAdder extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="sidebar_section panel flexy-table-filter">
         <h3>Adaugă coloană</h3>
-        <form onSubmit={this.addColumn}>
-          <Select
-            clearable
-            searchable
-            value={this.state.columnStrategy}
-            options={columnInputOptions[this.props.tableStrategySlug]}
-            onChange={this.updateColumnStrategy}
-          />
-          <ColumnInput
-            inputType={this.columnStrategyInputType()}
-            onUpdateStrategyInputs={this.updateColumnStrategyInputs}
-            settings={this.props.columnInputSettings}
-          />
-          <input
-            type="submit"
-            value="Adagă"
-          />
-        </form>
+        <div className="panel_contents">
+          <form onSubmit={this.addColumn} className="filter_form">
+            <div className="filter_form_field">
+              <Select
+                clearable
+                searchable
+                value={this.state.columnStrategy}
+                options={columnInputOptions[this.props.tableStrategySlug]}
+                onChange={this.updateColumnStrategy}
+              />
+            </div>
+
+            <ColumnInput
+              inputType={this.columnStrategyInputType()}
+              onUpdateStrategyInputs={this.updateColumnStrategyInputs}
+              settings={this.props.columnInputSettings}
+            />
+            <div className="buttons">
+              <input
+                type="submit"
+                value="Adagă"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

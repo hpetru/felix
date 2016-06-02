@@ -117,7 +117,7 @@ class FlexyTable extends React.Component {
           columnInputSettings={this.props.columnInputSettings}
           columnStrategyInputs={this.props.columnStrategyInputs}
         />
-        <table className="table table-striped">
+        <table className="table index_table flexy-table">
           <Thead
             columns={this.state.columns}
           />

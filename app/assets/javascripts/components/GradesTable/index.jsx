@@ -45,10 +45,15 @@ class GradesTable extends React.Component {
   render() {
     return (
       <div>
-        <Typeahead
-          strategySlug="semester_year"
-          onChange={this.updateStudentYear}
-        />
+        <div className="sidebar_section panel flexy-table-filter">
+          <h3>Anul de studii</h3>
+          <div className="panel_contents">
+            <Typeahead
+              strategySlug="semester_year"
+              onChange={this.updateStudentYear}
+            />
+          </div>
+        </div>
 
         {this.flexyTable()}
       </div>

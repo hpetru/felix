@@ -95,29 +95,36 @@ class StudentSubjectGrade extends React.Component {
   render() {
     return (
       <div>
-        <Typeahead
-          name="subject_name"
-          strategySlug="subject_name"
-          onChange={this.updateSubject}
-        />
-        <Typeahead
-          name="semester_name"
-          strategySlug="semester_name"
-          strategyInputs={{ year: this.props.settings.year }}
-          onChange={this.updateSemester}
-        />
+        <div className="select input filter_form_field">
+          <Typeahead
+            name="subject_name"
+            strategySlug="subject_name"
+            onChange={this.updateSubject}
+          />
+        </div>
+
+        <div className="select input filter_form_field">
+          <Typeahead
+            name="semester_name"
+            strategySlug="semester_name"
+            strategyInputs={{ year: this.props.settings.year }}
+            onChange={this.updateSemester}
+          />
+        </div>
 
         <hr />
 
-        <label>
-          <input
-            type="checkbox"
-            name="thesis"
-            checked={this.state.isThesis}
-            onChange={this.updateThesis}
-          />
-          Teză
-        </label>
+        <div className="boolean input filter_form_field">
+          <label>
+            <input
+              type="checkbox"
+              name="thesis"
+              checked={this.state.isThesis}
+              onChange={this.updateThesis}
+            />
+            Teză
+          </label>
+        </div>
       </div>
     );
   }
