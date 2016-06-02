@@ -110,24 +110,30 @@ class FlexyTable extends React.Component {
 
   render() {
     return (
-      <div className="flexy-table">
-        <ControlBar
-          addColumnCallback={this.addColumn}
-          tableStrategySlug={this.props.tableStrategySlug}
-          columnInputSettings={this.props.columnInputSettings}
-          columnStrategyInputs={this.props.columnStrategyInputs}
-        />
-        <table className="table index_table flexy-table">
-          <Thead
-            columns={this.state.columns}
+      <div className="flexy-table-wrapper">
+        <div className="flexy-table">
+          <ControlBar
+            addColumnCallback={this.addColumn}
+            tableStrategySlug={this.props.tableStrategySlug}
+            columnInputSettings={this.props.columnInputSettings}
+            columnStrategyInputs={this.props.columnStrategyInputs}
           />
-          <Tbody
-            columns={this.state.columns}
-            rows={this.state.rows}
-            updateCell={this.updateCell}
-            leaveCell={this.saveCell}
-          />
-        </table>
+          <div className="sidebar_section panel flexy-table-table-panel">
+            <div className="panel_contents">
+              <table className="table index_table flexy-table">
+                <Thead
+                  columns={this.state.columns}
+                />
+                <Tbody
+                  columns={this.state.columns}
+                  rows={this.state.rows}
+                  updateCell={this.updateCell}
+                  leaveCell={this.saveCell}
+                />
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

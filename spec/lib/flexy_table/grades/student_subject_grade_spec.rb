@@ -37,9 +37,10 @@ describe FlexyTable::Grades::StudentSubjectGrade do
         'id' => [
           'grades_student_subject_grade',
           subject.id,
-          semester.id
+          semester.id,
+          grade_type
         ].join('_'),
-        'label' => "#{subject.name} (#{semester.display_label}) - T",
+        'label' => "#{subject.name} (#{semester.semester_type_label}) T",
         'editable' => true
       )
     end

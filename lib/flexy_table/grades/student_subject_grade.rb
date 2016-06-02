@@ -33,9 +33,10 @@ module FlexyTable
           'id' => [
             'grades_student_subject_grade',
             subject.id,
-            semester.id
+            semester.id,
+            strategy_inputs['grade_type']
           ].join('_'),
-          'label' => "#{subject.name} (#{semester.display_label}) - #{grade_type_label}",
+          'label' => "#{subject.name} (#{semester.semester_type_label}) #{grade_type_label}",
           'editable' => true
         }
       end
@@ -63,9 +64,9 @@ module FlexyTable
       end
 
       def grade_type_label
-        GRADE_LABELS.fetch(
-          strategy_inputs['grade_type']
-        )
+        if strategy_inputs['grade_type'] == 'thesis'
+          'T'
+        end
       end
     end
   end

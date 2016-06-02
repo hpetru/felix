@@ -27,10 +27,12 @@ class Semester < ActiveRecord::Base
   )
 
   def display_label
-    semester = SEMESTER_MAPPING.fetch(
+    "#{year} - #{semester_type_label}"
+  end
+
+  def semester_type_label
+    SEMESTER_MAPPING.fetch(
       semester_type
     )
-
-    "#{year} - #{semester}"
   end
 end

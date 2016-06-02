@@ -30,8 +30,35 @@
     float: left;
   }
 
-  .flexy-table.table {
+  .flexy-table-table-panel {
     float: right;
     width: 78%;
+
+    th {
+      background: #efefef;
+    }
+
+    .panel_contents {
+      padding: 0px;
+
+      .flexy-table-wrapper {
+        overflow-x: scroll;
+      }
+
+      table {
+        margin-top: 0px;
+        margin-bottom: 0px;
+
+        td, th {
+          padding: 5px;
+        }
+
+        td {
+          input {
+            width: 30px;
+          }
+        }
+      }
+    }
   }
 }

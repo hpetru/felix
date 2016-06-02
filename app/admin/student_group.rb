@@ -28,7 +28,6 @@ ActiveAdmin.register StudentGroup do
       row :promotion
       row :current_grade_safe
       row :suffix
-      row :profile_display
       row :main_teacher
       row :students_count
     end
