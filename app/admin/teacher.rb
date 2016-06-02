@@ -14,6 +14,8 @@ ActiveAdmin.register Teacher do
     :retired,
     :phone,
     :gender,
+    :degree,
+    :degree_reeval_year,
     subject_ids: []
   )
 
