@@ -23,11 +23,16 @@ class GradesTable extends React.Component {
 
   flexyTable() {
     if (this.state.columnInputSettings.year) {
+      const columnStrategyInputs = {
+        student_group_id: this.props.studentGroupId,
+      };
+
       return (
         <FlexyTable
           tableStrategySlug={this.props.tableStrategySlug}
           defaultColumns={this.props.defaultColumns}
           columnInputSettings={this.state.columnInputSettings}
+          columnStrategyInputs={columnStrategyInputs}
         />
       );
     }
@@ -54,6 +59,7 @@ class GradesTable extends React.Component {
 GradesTable.propTypes = {
   tableStrategySlug: React.PropTypes.string.isRequired,
   defaultColumns: React.PropTypes.array,
+  studentGroupId: React.PropTypes.number.isRequired,
 };
 
 GradesTable.defaultProps = {

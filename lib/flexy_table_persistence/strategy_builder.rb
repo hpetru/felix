@@ -1,9 +1,9 @@
-module FlexyTable
+module FlexyTablePersistence
   class StrategyBuilder < StrategyBuilderBase
     private
 
     def strategies
-      FlexyTable::TABLE_STRATEGIES
+      FlexyTablePersistence::TABLE_STRATEGIES
     end
   end
 end

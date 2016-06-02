@@ -35,7 +35,8 @@ module FlexyTable
             subject.id,
             semester.id
           ].join('_'),
-          'label' => "#{subject.name} (#{semester.display_label}) - #{grade_type_label}"
+          'label' => "#{subject.name} (#{semester.display_label}) - #{grade_type_label}",
+          'editable' => true
         }
       end
 

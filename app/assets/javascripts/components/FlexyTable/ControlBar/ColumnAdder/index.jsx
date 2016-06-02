@@ -19,10 +19,14 @@ class ColumnAdder extends React.Component {
 
   addColumn(event) {
     event.preventDefault();
+    const strategyInputs = Object.assign(
+      this.props.columnStrategyInputs,
+      this.state.strategyInputs
+    );
     columnFetcher({
       columnStrategySlug: this.columnStrategySlug(),
       tableStrategySlug: this.props.tableStrategySlug,
-      strategyInputs: this.state.strategyInputs,
+      strategyInputs,
       onSuccess: (response) => {
         this.props.addColumnCallback(response);
         this.setState({
@@ -89,6 +93,7 @@ ColumnAdder.propTypes = {
   addColumnCallback: React.PropTypes.func.isRequired,
   tableStrategySlug: React.PropTypes.string.isRequired,
   columnInputSettings: React.PropTypes.object.isRequired,
+  columnStrategyInputs: React.PropTypes.object.isRequired,
 }
 
 module.exports = ColumnAdder;

@@ -12,6 +12,8 @@ class Tbody extends React.Component {
           key={i}
           columns={this.props.columns}
           rowData={row}
+          updateCell={this.props.updateCell}
+          leaveCell={this.props.leaveCell}
         />
       )
       i += 1;
@@ -28,6 +30,8 @@ class Tbody extends React.Component {
 Tbody.propTypes = {
   columns: React.PropTypes.array.isRequired,
   rows: React.PropTypes.array.isRequired,
+  updateCell: React.PropTypes.func.isRequired,
+  leaveCell: React.PropTypes.func.isRequired,
 }
 
 module.exports = Tbody;

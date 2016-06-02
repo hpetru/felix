@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     namespace :v0 do
       get 'typeahead', to: 'typeahead#index'
       get 'flexy_table', to: 'flexy_table#index'
+
+      namespace 'flexy_table' do
+        post 'cells', to: 'cells#save'
+      end
     end
   end
 

@@ -5,6 +5,7 @@ import Tbody from './Tbody.jsx';
 import ControlBar from './ControlBar/index.jsx';
 import tableFetcher from './ajax/tableFetcher.js';
 import columnFetcher from './ajax/columnFetcher.js';
+import cellSaver from './ajax/cellSaver.js';
 import immutable from 'seamless-immutable';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';
 
@@ -17,15 +18,11 @@ class FlexyTable extends React.Component {
       rows: immutable([]),
     };
 
-    this.loadTable = this.loadTable.bind(this);
     this.addColumn = this.addColumn.bind(this);
+    this.updateCell = this.updateCell.bind(this);
+    this.saveCell = this.saveCell.bind(this);
 
     this.loadDefaultColumns();
-  }
-
-  componentDidMount() {
-    // Va fi folosit in viitor ...
-    // this.loadTable();
   }
 
   loadDefaultColumns() {
@@ -41,48 +38,21 @@ class FlexyTable extends React.Component {
     }
   }
 
-  // TODO: Should be rewrited ASAP
-  loadTable() {
-    tableFetcher({
-      id: 1,
-      onSuccess: (response) => {
-        const testColumns = [
-          {
-            id: '1',
-            label: 'Nume',
-            cells: [
-              [1, 'Ion Brehna'],
-              [2, 'Vasile Bogdan'],
-              [3, 'Stefan Ionica'],
-            ]
-          },
-          {
-            id: '2',
-            label: 'Medie',
-            cells: [
-              [1, 8.4],
-              [2, 3.9],
-              [3, 10],
-            ]
-          },
-        ];
-
-        for(const column of testColumns) {
-          this.addColumn(column);
-        }
-      }
-    });
-  }
-
 
   addColumn(column_data) {
     const newColumns = this.state.columns.asMutable();
     const newRows = this.state.rows.asMutable({ deep: true });
     const rows = column_data.cells;
+    const columnStrategySlug = column_data.strategy_slug;
     const column = column_data.column;
+    const strategyInputs = column_data.strategy_inputs;
+
     const columnSchema = {
       id: column.id,
-      label: column.label
+      label: column.label,
+      editable: column.editable,
+      strategySlug: columnStrategySlug,
+      strategyInputs,
     };
     newColumns.push(columnSchema);
 
@@ -109,6 +79,35 @@ class FlexyTable extends React.Component {
     )
   }
 
+  updateCell(value, columnId, rowId) {
+    const rows = this.state.rows.asMutable({ deep: true });
+    const row = _.findWhere(rows, { id: rowId });
+    row[columnId] = value;
+
+    this.setState({
+      rows: immutable(rows),
+    });
+  }
+
+  saveCell(value, columnId, rowId) {
+    const columnSchema = _.findWhere(
+      this.state.columns,
+      { id: columnId }
+    );
+
+    cellSaver({
+      rowId,
+      value,
+      tableStrategySlug: this.props.tableStrategySlug,
+      columnStrategySlug: columnSchema.strategySlug,
+      columnStrategyInputs: columnSchema.strategyInputs,
+      onSuccess: () => {
+        // TODO: Notify user
+        console.log('Yay');
+      },
+    });
+  }
+
   render() {
     return (
       <div className="flexy-table">
@@ -116,6 +115,7 @@ class FlexyTable extends React.Component {
           addColumnCallback={this.addColumn}
           tableStrategySlug={this.props.tableStrategySlug}
           columnInputSettings={this.props.columnInputSettings}
+          columnStrategyInputs={this.props.columnStrategyInputs}
         />
         <table className="table table-striped">
           <Thead
@@ -124,6 +124,8 @@ class FlexyTable extends React.Component {
           <Tbody
             columns={this.state.columns}
             rows={this.state.rows}
+            updateCell={this.updateCell}
+            leaveCell={this.saveCell}
           />
         </table>
       </div>
@@ -133,12 +135,14 @@ class FlexyTable extends React.Component {
 
 FlexyTable.propTypes = {
   tableStrategySlug: React.PropTypes.string.isRequired,
+  columnStrategyInputs: React.PropTypes.object.isRequired,
   columnInputSettings: React.PropTypes.object,
 };
 
 FlexyTable.defaultProps = {
   defaultColumns: [],
   columnInputSettings: {},
+  columnStrategyInputs: {},
 };
 
 module.exports = immutableRenderDecorator(FlexyTable);

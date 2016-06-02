@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 function columnFetcher({ columnStrategySlug, tableStrategySlug, onSuccess, strategyInputs }) {
   const method = 'GET';
-  const url = `/api/v0/flexy_table`;
+  const url = '/api/v0/flexy_table';
   const data = {
     table_strategy_slug: tableStrategySlug,
     column_strategy_slug: columnStrategySlug,

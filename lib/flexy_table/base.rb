@@ -30,7 +30,9 @@ module FlexyTable
     def data
       {
         'cells' => strategy_data,
-        'column' => strategy_column
+        'column' => strategy_column,
+        'strategy_slug' => self.class.strategy_slug,
+        'strategy_inputs' => strategy_inputs
       }
     end
   end
