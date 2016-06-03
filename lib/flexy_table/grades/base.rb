@@ -10,8 +10,13 @@ module FlexyTable
       private
 
       def students
-        Student.where(
-          student_group_id: strategy_inputs['student_group_id']
+        Student.where(student_group: student_group).
+          order_by_name
+      end
+
+      def student_group
+        StudentGroup.find(
+          strategy_inputs['student_group_id']
         )
       end
     end

@@ -51,12 +51,15 @@ class StudentGroup < ActiveRecord::Base
   end
 
   def profile_display
-    I18n.t profile_slug, scope: [
-      :activerecord,
-      :values,
-      :student_group,
-      :profile_slug
-    ]
+    I18n.t(
+      profile_slug || 'default',
+      scope: [
+        :activerecord,
+        :values,
+        :student_group,
+        :profile_slug
+      ]
+    )
   end
 
   def self.current

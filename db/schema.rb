@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519141520) do
+ActiveRecord::Schema.define(version: 20160603093812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(version: 20160519141520) do
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "flexy_memory_columns", force: :cascade do |t|
+    t.integer  "flexy_memory_table_id",              null: false
+    t.jsonb    "strategy_inputs",       default: {}, null: false
+    t.string   "strategy_slug",                      null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  create_table "flexy_memory_tables", force: :cascade do |t|
+    t.string   "table_strategy_slug",                null: false
+    t.jsonb    "column_input_settings", default: {}, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "institutions", force: :cascade do |t|

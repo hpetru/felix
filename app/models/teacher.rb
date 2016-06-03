@@ -19,6 +19,8 @@
 #
 
 class Teacher < ActiveRecord::Base
+  NAME_REGEXP = /\A[^0-9`!@#\$%\^&*+_=]+\z/
+
   enum degree: {
     doctorate: 'doctorate',
     superior_degree: 'superior_degree',
@@ -39,7 +41,7 @@ class Teacher < ActiveRecord::Base
       maximum: 20,
     },
     format: {
-      with: /\A[^0-9`!@#\$%\^&*+_=]+\z/
+      with: NAME_REGEXP
     }
   )
 
@@ -61,12 +63,15 @@ class Teacher < ActiveRecord::Base
   end
 
   def degree_display
-    I18n.t degree, scope: [
-      :activerecord,
-      :values,
-      :teacher,
-      :degree
-    ]
+    I18n.t(
+      degree || 'default',
+      scope: [
+        :activerecord,
+        :values,
+        :teacher,
+        :degree
+      ]
+    )
   end
 
   alias :to_s :full_name

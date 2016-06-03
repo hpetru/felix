@@ -4,7 +4,6 @@ import Thead from './Thead.jsx';
 import Tbody from './Tbody.jsx';
 import ControlBar from './ControlBar/index.jsx';
 import tableFetcher from './ajax/tableFetcher.js';
-import columnFetcher from './ajax/columnFetcher.js';
 import cellSaver from './ajax/cellSaver.js';
 import immutable from 'seamless-immutable';
 import { immutableRenderDecorator } from 'react-immutable-render-mixin';
@@ -21,21 +20,29 @@ class FlexyTable extends React.Component {
     this.addColumn = this.addColumn.bind(this);
     this.updateCell = this.updateCell.bind(this);
     this.saveCell = this.saveCell.bind(this);
-
-    this.loadDefaultColumns();
+    this.loadTable = this.loadTable.bind(this);
   }
 
-  loadDefaultColumns() {
-    for(const column of this.props.defaultColumns) {
-      columnFetcher({
-        tableStrategySlug: this.props.tableStrategySlug,
-        columnStrategySlug: column.strategySlug,
-        strategyInputs: column.strategyInputs,
-        onSuccess: (response) => {
-          this.addColumn(response);
-        },
-      })
-    }
+  componentWillMount() {
+    this.loadTable();
+  }
+
+  loadTable() {
+    tableFetcher({
+      tableStrategySlug: this.props.tableStrategySlug,
+      columnInputSettings: this.props.columnInputSettings,
+      onSuccess: (response) => {
+        this.setState({
+          tableId: response.id,
+          columns: immutable([]),
+          rows: immutable([]),
+        });
+
+        for(const column of response.columns) {
+          this.addColumn(column);
+        }
+      }
+    });
   }
 
 
@@ -44,11 +51,11 @@ class FlexyTable extends React.Component {
     const newRows = this.state.rows.asMutable({ deep: true });
     const rows = column_data.cells;
     const columnStrategySlug = column_data.strategy_slug;
-    const column = column_data.column;
+    const column = column_data.schema;
     const strategyInputs = column_data.strategy_inputs;
 
     const columnSchema = {
-      id: column.id,
+      id: column_data.id,
       label: column.label,
       editable: column.editable,
       strategySlug: columnStrategySlug,
@@ -114,6 +121,7 @@ class FlexyTable extends React.Component {
         <div className="flexy-table">
           <ControlBar
             addColumnCallback={this.addColumn}
+            tableId={this.state.tableId}
             tableStrategySlug={this.props.tableStrategySlug}
             columnInputSettings={this.props.columnInputSettings}
             columnStrategyInputs={this.props.columnStrategyInputs}

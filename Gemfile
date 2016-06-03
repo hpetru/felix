@@ -23,6 +23,7 @@ gem 'react-rails'
 gem 'timecop'
 gem 'select2-rails'
 gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'byebug'

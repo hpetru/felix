@@ -9,12 +9,12 @@ module FlexyTable
       'grades'
     end
 
-    def self.default_columns(student_group)
+    def self.default_columns(column_input_settings)
       [
         {
-          strategySlug: 'student_name',
-          strategyInputs: {
-            student_group_id: student_group.id
+          'strategy_slug' => 'student_name',
+          'strategy_inputs' => {
+            'student_group_id' => column_input_settings['student_group_id']
           }
         }
       ]

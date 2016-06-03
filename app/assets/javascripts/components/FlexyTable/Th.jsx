@@ -16,7 +16,7 @@ class Th extends React.Component {
 
 Th.propTypes = {
   label: React.PropTypes.string.isRequired,
-  columnId: React.PropTypes.string.isRequired,
+  columnId: React.PropTypes.number.isRequired,
   permanent: React.PropTypes.bool.isRequired,
 }
 

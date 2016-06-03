@@ -35,6 +35,8 @@
 
 class Student < ActiveRecord::Base
   INSIDE_CODE_REGEX = /[A-Z]\-\d{4}/
+  NAME_REGEXP = /\A[^0-9`!@#\$%\^&*+_=]+\z/
+
   validates(
     :first_name,
     :last_name,
@@ -54,7 +56,7 @@ class Student < ActiveRecord::Base
       maximum: 20,
     },
     format: {
-      with: /\A[^0-9`!@#\$%\^&*+_=]+\z/
+      with: NAME_REGEXP
     }
   )
 
@@ -84,6 +86,13 @@ class Student < ActiveRecord::Base
   belongs_to :foreign_language, class_name: Subject
   delegate :main_teacher, to: :student_group
 
+  def self.order_by_name
+    order(
+      last_name: :asc,
+      first_name: :asc
+    )
+  end
+
   def self.current
     joins(:student_group).where(
       '? - promotion + 1 <= 12',
@@ -99,7 +108,7 @@ class Student < ActiveRecord::Base
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{last_name} #{first_name}"
   end
 
   alias :to_s :full_name

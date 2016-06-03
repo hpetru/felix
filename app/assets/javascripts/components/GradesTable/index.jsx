@@ -7,10 +7,13 @@ class GradesTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      columnInputSettings: immutable({ }),
+      columnInputSettings: immutable({
+        student_group_id: this.props.studentGroupId,
+      }),
     };
 
     this.updateStudentYear = this.updateStudentYear.bind(this);
+    this.flexyTable = this.flexyTable.bind(this);
   }
 
   updateStudentYear(year) {

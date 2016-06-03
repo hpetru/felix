@@ -59,6 +59,37 @@ describe Student do
   it { should_not allow_value('B-023').for(:inside_code_token) }
   it { should allow_value('B-0234').for(:inside_code_token) }
 
+  describe '.order_by_name' do
+    it do
+      students = [
+        create(
+          :student,
+          first_name: 'Ion',
+          last_name: 'Adomnita'
+        ),
+        create(
+          :student,
+          first_name: 'Bernic',
+          last_name: 'Ion'
+        ),
+        create(
+          :student,
+          first_name: 'Bernic',
+          last_name: 'Andrei'
+        )
+      ]
+      ordered_students = described_class.order_by_name
+
+      expect(ordered_students).to eq(
+        [
+          students[0],
+          students[2],
+          students[1]
+        ]
+      )
+    end
+  end
+
   describe '#full_name' do
     it do
       student = described_class.new(
@@ -67,7 +98,7 @@ describe Student do
       )
 
       expect(student.full_name).to eq(
-        'Ion Babuc'
+        'Babuc Ion'
       )
     end
   end

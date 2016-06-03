@@ -3,7 +3,7 @@ import Select from 'react-select';
 import ColumnInput from '../ColumnInput/index.jsx';
 import columnInputOptions from './columnInputOptions.jsx';
 import immutable from 'seamless-immutable';
-import columnFetcher from '../../ajax/columnFetcher.js';
+import columnCreator from '../../ajax/columnCreator.js';
 
 class ColumnAdder extends React.Component {
   constructor(props) {
@@ -23,7 +23,9 @@ class ColumnAdder extends React.Component {
       this.props.columnStrategyInputs,
       this.state.strategyInputs
     );
-    columnFetcher({
+
+    columnCreator({
+      tableId: this.props.tableId,
       columnStrategySlug: this.columnStrategySlug(),
       tableStrategySlug: this.props.tableStrategySlug,
       strategyInputs,
@@ -97,6 +99,7 @@ class ColumnAdder extends React.Component {
 }
 
 ColumnAdder.propTypes = {
+  tableId: React.PropTypes.number.isRequired,
   addColumnCallback: React.PropTypes.func.isRequired,
   tableStrategySlug: React.PropTypes.string.isRequired,
   columnInputSettings: React.PropTypes.object.isRequired,

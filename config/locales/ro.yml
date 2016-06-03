@@ -153,6 +153,7 @@ ro:
           female: 'Fată'
       teacher:
         degree:
+          default: ''
           doctorate: 'Doctorat'
           superior_degree: 'Superior'
           first_degree: 'Gradul I'
@@ -160,6 +161,7 @@ ro:
           third_degree: 'Gradul III'
       student_group:
         profile_slug:
+          default: ''
           real: 'Real'
           humanitarian: 'Uman'
   devise:

@@ -1,26 +1,32 @@
 import React from 'react';
 import $ from 'jquery';
 
-function tableFetcher({ id, onSuccess }) {
-  const httpMethod = 'GET';
-  const apiEndpoint = `/api/v0/tables/${id}`;
+function tableFetcher({ tableStrategySlug, columnInputSettings, onSuccess }) {
+  const method = 'POST';
+  const url = `/api/v0/flexy_table/tables`;
+  const data = {
+    table: {
+      table_strategy_slug: tableStrategySlug,
+      column_input_settings: JSON.stringify(columnInputSettings),
+    }
+  };
 
   $.ajax({
-    method: httpMethod,
-    url: apiEndpoint,
+    method,
+    url,
+    data,
     success: onSuccess,
-    error: onSuccess,
-    /*
-    error: () => {
-      console.log('API endpoit error');
-    }
-    */
   });
 }
 
 tableFetcher.propTypes = {
-  id: React.PropTypes.number.isRequired,
+  tableStrategySlug: React.PropTypes.string.isRequired,
+  columnInputSettings: React.PropTypes.object.isRequired,
   onSuccess: React.PropTypes.func.isRequired,
-}
+};
+
+tableFetcher.defaultProps = {
+  columnInputSettings: {},
+};
 
 module.exports = tableFetcher;

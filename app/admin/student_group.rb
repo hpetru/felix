@@ -55,9 +55,6 @@ ActiveAdmin.register StudentGroup do
   controller do
     def show
       super do
-        @default_columns = FlexyTable::Grades.default_columns(
-          @student_group
-        )
         @table_strategy_slug = FlexyTable::Grades.table_strategy_slug
       end
     end

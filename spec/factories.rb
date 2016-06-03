@@ -1,4 +1,35 @@
 FactoryGirl.define do
+  factory :flexy_memory_column, class: 'FlexyMemory::Column' do
+    association(
+      :table,
+      factory: :flexy_memory_table,
+      strategy: :build
+    )
+    strategy_inputs do
+      grade_type = 'semester'
+      student_group = create(:student_group)
+      subject = create(:subject)
+      semester = create(:semester)
+      {
+        'subject_id' => subject.id,
+        'student_group_id' => student_group.id,
+        'grade_type' => grade_type,
+        'semester_id' => semester.id
+      }
+    end
+    strategy_slug 'student_subject_grade'
+  end
+
+  factory :flexy_memory_table, class: 'FlexyMemory::Table' do
+    table_strategy_slug 'grades'
+    column_input_settings do
+      student_group = create(:student_group)
+      {
+        'student_group_id' => student_group.id
+      }
+    end
+  end
+
   factory :institution do
     name 'Colegiul Financiar-Bancar Chișinău'
   end

@@ -12,6 +12,7 @@ class Thead extends React.Component {
     for(const column of this.props.columns) {
       columns.push(
         <Th
+          key={column.id}
           label={column.label}
           columnId={column.id}
         />

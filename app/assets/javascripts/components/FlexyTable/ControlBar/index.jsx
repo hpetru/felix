@@ -5,6 +5,7 @@ class ControlBar extends React.Component {
   render() {
     return (
       <ColumnAdder
+        tableId={this.props.tableId}
         addColumnCallback={this.props.addColumnCallback}
         tableStrategySlug={this.props.tableStrategySlug}
         columnInputSettings={this.props.columnInputSettings}
@@ -15,6 +16,7 @@ class ControlBar extends React.Component {
 }
 
 ControlBar.propTypes = {
+  tableId: React.PropTypes.number.isRequired,
   addColumnCallback: React.PropTypes.func.isRequired,
   tableStrategySlug: React.PropTypes.string.isRequired,
   columnInputSettings: React.PropTypes.object.isRequired,
