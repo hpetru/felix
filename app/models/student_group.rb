@@ -55,7 +55,7 @@ class StudentGroup < ActiveRecord::Base
       :values,
       :student_group,
       :profile_slug
-    ]
+    ] if profile_slug
   end
 
   def self.current

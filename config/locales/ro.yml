@@ -118,7 +118,7 @@ ro:
         current_grade_safe: 'Clasa curentă'
         main_teacher: 'Diriginte'
         suffix: 'Paralela'
-        profile: 'Profil'
+        profile_display: 'Profil'
         profile_slug: 'Profil'
         students_count: 'Nr. elevi'
         student_groups: 'Diriginte'

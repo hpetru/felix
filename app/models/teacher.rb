@@ -66,7 +66,7 @@ class Teacher < ActiveRecord::Base
       :values,
       :teacher,
       :degree
-    ]
+    ] if degree
   end
 
   alias :to_s :full_name
