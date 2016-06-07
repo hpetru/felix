@@ -14,6 +14,8 @@ ActiveAdmin.register Teacher do
     :retired,
     :phone,
     :gender,
+    :degree,
+    :degree_reeval_year,
     subject_ids: []
   )
 
@@ -27,9 +29,9 @@ ActiveAdmin.register Teacher do
   filter :degree, as: :select, collection: [
     ['Doctorat', 'doctorate'],
     ['Superior', 'superior_degree'],
-    ['Gardul I', 'first_degree'],
-    ['Gardul II', 'second_degree'],
-    ['Gardul III', 'third_degree'],
+    ['Gradul I', 'first_degree'],
+    ['Gradul II', 'second_degree'],
+    ['Gradul III', 'third_degree'],
   ]
 
   filter :degree_reeval_year
@@ -108,6 +110,7 @@ ActiveAdmin.register Teacher do
         ['Gardul II', 'second_degree'],
         ['Gardul III', 'third_degree'],
       ]
+      f.input :degree_reeval_year
 
       f.input :retired, as: :boolean
       f.input :syndicate_member, as: :boolean

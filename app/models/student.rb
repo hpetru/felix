@@ -34,6 +34,7 @@
 #
 
 class Student < ActiveRecord::Base
+  INSIDE_CODE_REGEX = /[A-Z]\-\d{4}/
   validates(
     :first_name,
     :last_name,
@@ -66,7 +67,14 @@ class Student < ActiveRecord::Base
     },
     format: {
       with: /\d*/
-    }
+    },
+    uniqueness: true
+  )
+
+  validates(
+    :inside_code_token,
+    format: { with: INSIDE_CODE_REGEX },
+    uniqueness: true
   )
 
   belongs_to :nationality

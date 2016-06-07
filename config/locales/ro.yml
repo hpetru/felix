@@ -37,7 +37,8 @@ ro:
             born_at:
               blank: 'Data nașterii este obligatorie'
             inside_code_token:
-              blank: 'Data nașterii este obligatorie'
+              blank: 'Codul intern este obligatoriu'
+              invalid: 'Codul intern are formatul A-0000'
             idnp_token:
               invalid: 'IDNP poate conține doar cifre'
               too_short: 'Lungimea este egală cu 13'
@@ -118,11 +119,11 @@ ro:
         current_grade_safe: 'Clasa curentă'
         main_teacher: 'Diriginte'
         suffix: 'Paralela'
-        profile: 'Profil'
+        profile_display: 'Profil'
         profile_slug: 'Profil'
         students_count: 'Nr. elevi'
         student_groups: 'Diriginte'
-        promotion: 'Promoția'
+        promotion: 'Anul de început'
         students: 'Elevi'
       subject:
         name: 'Nume'
@@ -209,7 +210,7 @@ ro:
         title: 'Email'
       password:
         title: 'Parola'
-    powered_by: 'Powered with mad gay love by Dorin & Petru'
+    powered_by: 'Powered by Dorin & Petru'
     pagination:
       empty: 'Nu au fost găsite înregistrări'
       one: 'Este afișată <b>o singură</b> înregistrare'

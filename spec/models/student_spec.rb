@@ -56,6 +56,8 @@ describe Student do
   it { should_not allow_value('Dorin32;').for(:first_name) }
   it { should_not allow_value('Mih3io4j_&d,').for(:last_name) }
   it { should_not allow_value('8923983jska').for(:idnp_token) }
+  it { should_not allow_value('B-023').for(:inside_code_token) }
+  it { should allow_value('B-0234').for(:inside_code_token) }
 
   describe '#full_name' do
     it do

@@ -60,10 +60,14 @@ describe FlexyTable::Grades::StudentSubjectGrade do
         ),
         create(
           :student,
+          idnp_token: '0123456789123',
+          inside_code_token: 'A-9999',
           student_group: student_group
         ),
         create(
           :student,
+          idnp_token: '0423456789123',
+          inside_code_token: 'A-8999',
           student_group: student_group
         )
       ]

@@ -12,6 +12,7 @@
 #
 
 class StudentGroup < ActiveRecord::Base
+  STUDY_YEAR_START = Date.new(Date.today.year, 8, 25)
   enum profile_slug: {
     real: 'real',
     humanitarian: 'humanitarian'
@@ -73,7 +74,7 @@ class StudentGroup < ActiveRecord::Base
   end
 
   def self.current_study_year
-    if Date.today.month > 8
+    if Date.today > STUDY_YEAR_START
       Date.today.year
     else
       Date.today.year - 1
