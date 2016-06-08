@@ -51,7 +51,7 @@ FactoryGirl.define do
     first_name 'Doina'
     last_name 'Prodan'
     gender 'female'
-    inside_code_token 'P-00934'
+    sequence(:inside_code_token) { |n| "P-0093#{n}" }
     born_at Date.current - 18.years
     association(
       :student_group,
