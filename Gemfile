@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.0'
 
+gem 'classy_hash'
 gem 'activeadmin', github: 'activeadmin'
 gem 'flattened_active_admin'
 gem 'rails', '4.2.6'

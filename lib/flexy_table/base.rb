@@ -1,5 +1,7 @@
 module FlexyTable
   class Base
+    include SchemaHashValidator
+
     def self.strategy_slug
       raise NotImplementedError
     end
@@ -11,12 +13,21 @@ module FlexyTable
     attr_reader :strategy_inputs, :errors
     def initialize(strategy_inputs)
       @strategy_inputs = strategy_inputs
-      @errors = []
+      @errors = ActiveModel::Errors.new(self)
     end
 
-    # TODO: Write real validation method
+    def validate!
+      schema = self.class.strategy_inputs_schema
+      validate_hash_schema(
+        schema,
+        @strategy_inputs,
+        errors
+      )
+    end
+
     def valid?
-      true
+      validate!
+      errors.empty?
     end
 
     def strategy_data
