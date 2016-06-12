@@ -117,7 +117,10 @@ ActiveAdmin.register Student do
       f.input :born_at, as: :datepicker,
         input_html: { placeholder: '1994-02-29' }
       f.input :gender, as: :select,
-        include_blank: false
+        include_blank: false, collection: [
+          ['Băiat', 'male'],
+          ['Fată', 'female']
+        ]
       f.input :idnp_token
       f.input :nationality, as: :select,
         include_blank: false

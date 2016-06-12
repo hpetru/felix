@@ -113,7 +113,7 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   # config.root_to = 'dashboard#index'
-
+  config.root_to = 'students#index'
   # == Admin Comments
   #
   # This allows your users to comment on any resource registered with Active Admin.

@@ -171,6 +171,11 @@ ro:
           'Pentru a purcede mai departe trebuie să vă autentificați'
         invalid:
           'Emailul este greșit'
+      already_authenticated:
+          'Sunteți deja autentificat'
+    sessions:
+      user:
+        signed_in: 'Autentificare cu succes'
   active_admin:
     view: 'Vizualiare'
     edit: 'Editare'
