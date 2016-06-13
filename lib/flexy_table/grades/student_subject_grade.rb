@@ -59,7 +59,7 @@ module FlexyTable
         @grades ||= StudentGrade.joins(:student).
           merge(students).
           where(grade_type: strategy_inputs['grade_type']).
-          where(subject: subject).
+          where(subject: subject, semester: semester).
           each_with_object({}) { |grade, memo| memo.merge!(grade.student_id => grade.value) }
       end
 

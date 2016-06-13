@@ -27,6 +27,11 @@ class FlexyTable extends React.Component {
     this.loadTable();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props = nextProps;
+    this.loadTable();
+  }
+
   loadTable() {
     tableFetcher({
       tableStrategySlug: this.props.tableStrategySlug,
@@ -44,7 +49,6 @@ class FlexyTable extends React.Component {
       }
     });
   }
-
 
   addColumn(column_data) {
     const newColumns = this.state.columns.asMutable();

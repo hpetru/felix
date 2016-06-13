@@ -3,7 +3,7 @@ module Api
     module FlexyTable
       class ColumnsController < ApplicationController
         def create
-          column = FlexyMemory::Column.create(column_params)
+          column = FlexyMemory::Column.fetch_or_create(column_params)
           render(
             json: column,
             serializer: Api::V0::FlexyTable::ColumnSerializer

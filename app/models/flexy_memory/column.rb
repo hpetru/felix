@@ -11,6 +11,14 @@
 #
 
 class FlexyMemory::Column < ActiveRecord::Base
+  def self.fetch_or_create(column_params)
+    column = where(column_params).first_or_initialize
+    if column.new_record?
+      column.save!
+    end
+    column
+  end
+
   belongs_to(
     :table,
     foreign_key: :flexy_memory_table_id
