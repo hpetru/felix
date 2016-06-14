@@ -19,24 +19,22 @@ describe Typeahead::SemesterYear do
 
   describe '#strategy_data' do
     it do
-      create(:semester, year: 2015, semester_type: 'first_semester')
-      create(:semester, year: 2015, semester_type: 'second_semester')
-      create(:semester, year: 2013, semester_type: 'second_semester')
-      create(:semester, year: 1990, semester_type: 'second_semester')
+      new_time = Time.local(2016, 5, 1, 12, 0, 0)
+      Timecop.freeze(new_time)
+      group = create(:student_group, promotion: 2015)
+
       strategy_inputs = {
-        'query' => '20'
+        'query' => '20',
+        'studentGroupId' => group.id
       }
+
       strategy = described_class.new(strategy_inputs)
 
       expect(strategy.strategy_data).to eq(
         [
           {
             value: 2015,
-            label: 2015
-          },
-          {
-            value: 2013,
-            label: 2013
+            label: '2015 - Clasa 1'
           }
         ]
       )

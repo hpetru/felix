@@ -35,6 +35,10 @@ class StudentGroup < ActiveRecord::Base
   end
 
   def current_grade_safe
+    current_grade <= 12 ? current_grade : 12
+  end
+
+  def current_grade_display
     current_grade <= 12 ? current_grade : '[A] 12'
   end
 
@@ -42,12 +46,16 @@ class StudentGroup < ActiveRecord::Base
     students.count
   end
 
+  def study_year_for_grade(grade)
+    promotion + grade - 1
+  end
+
   def to_s
-    "#{current_grade_safe} #{suffix} - #{main_teacher.full_name}"
+    "#{current_grade_display} #{suffix} - #{main_teacher.full_name}"
   end
 
   def display
-    "#{current_grade_safe} #{suffix}"
+    "#{current_grade_display} #{suffix}"
   end
 
   def profile_display

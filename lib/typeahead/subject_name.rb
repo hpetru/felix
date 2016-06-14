@@ -25,7 +25,7 @@ module Typeahead
       arel = Subject.arel_table
       Subject.where(
         arel[:name].matches("%#{query}%")
-      )
+      ).order(:name)
     end
   end
 end

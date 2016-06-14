@@ -11,12 +11,22 @@ module Typeahead
     end
 
     def strategy_data
+      return (1..student_group.current_grade_safe).map do |grade|
+        study_year = student_group.study_year_for_grade(grade)
+        {
+          value: study_year,
+          label: "#{study_year} - Clasa #{grade}"
+        }
+      end
+
+      """
       semesters.map do |semester|
         {
           value: semester.year,
           label: semester.year
         }
       end
+      """
     end
 
     private
@@ -41,6 +51,10 @@ module Typeahead
           Arel::Nodes.build_quoted('')
         ]
       )
+    end
+
+    def student_group
+      StudentGroup.find(@strategy_inputs['studentGroupId'])
     end
   end
 end

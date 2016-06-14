@@ -30,4 +30,9 @@ class StudentGrade < ActiveRecord::Base
     :grade_type,
     presence: true
   )
+
+  validates :value, numericality: {
+    greater_or_equal_to: 1,
+    less_than_or_equal_to: 10
+  }
 end

@@ -36,9 +36,19 @@ describe StudentGroup do
     it do
       new_time = Time.local(2016, 9, 1, 12, 0, 0)
       Timecop.freeze(new_time)
+      group = described_class.new(promotion: 2003)
+
+      expect(group.current_grade_safe).to eq(12)
+    end
+  end
+
+  describe '#current_grade_display' do
+    it do
+      new_time = Time.local(2017, 9, 1, 12, 0, 0)
+      Timecop.freeze(new_time)
       group = described_class.new(promotion: 2002)
 
-      expect(group.current_grade_safe).to eq('[A] 12')
+      expect(group.current_grade_display).to eq('[A] 12')
     end
   end
 

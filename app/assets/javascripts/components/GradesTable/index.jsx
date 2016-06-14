@@ -12,6 +12,10 @@ class GradesTable extends React.Component {
       }),
     };
 
+    this.studentGroupId = {
+      studentGroupId: this.props.studentGroupId,
+    };
+
     this.updateStudentYear = this.updateStudentYear.bind(this);
     this.flexyTable = this.flexyTable.bind(this);
   }
@@ -52,6 +56,7 @@ class GradesTable extends React.Component {
           <h3>Anul de studii</h3>
           <div className="panel_contents">
             <Typeahead
+              strategyInputs={this.studentGroupId}
               strategySlug="semester_year"
               onChange={this.updateStudentYear}
             />

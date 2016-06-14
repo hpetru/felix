@@ -20,8 +20,8 @@ describe Typeahead::SubjectName do
   describe '#strategy_data' do
     it do
       subjects = [
-        create(:subject, name: 'Limba romana'),
         create(:subject, name: 'Limba franceza'),
+        create(:subject, name: 'Limba romana'),
         create(:subject, name: 'Matematica')
       ]
       strategy_inputs = {
