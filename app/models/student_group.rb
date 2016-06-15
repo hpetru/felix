@@ -51,7 +51,11 @@ class StudentGroup < ActiveRecord::Base
   end
 
   def to_s
-    "#{current_grade_display} #{suffix} - #{main_teacher.full_name}"
+    if main_teacher.nil?
+      return "#{current_grade_display} #{suffix}"
+    else
+      "#{current_grade_display} #{suffix} - #{main_teacher.full_name}"
+    end
   end
 
   def display
