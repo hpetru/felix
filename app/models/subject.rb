@@ -14,4 +14,10 @@ class Subject < ActiveRecord::Base
   def self.all_as_selectable
     all.map { |x| [x.name, x.id] }
   end
+
+  def display
+    name
+  end
+
+  alias :to_s :display
 end

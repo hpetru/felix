@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 ruby '2.3.0'
-
+gem 'rails3-jquery-autocomplete'
+gem 'rails-jquery-autocomplete'
 gem 'classy_hash'
 gem 'activeadmin', github: 'activeadmin'
 gem 'flattened_active_admin'

@@ -13,6 +13,26 @@ Rails.application.routes.draw do
     end
   end
 
+#  resource :addresses do
+#    get :autocomplete_addess_street, on: :collection
+#  end
+
+#  resource :city do
+#    get :autocomplete_city_name, on: :collection
+#  end
+
+  resource :address do
+    get :autocomplete_address_street, on: :collection
+  end
+
+  resource :city do
+    get :autocomplete_city_name, on: :collection
+  end
+
+  resource :institution do
+    get :autocomplete_institution_name, on: :collection
+  end
+
   root to: redirect('admin')
 
   ActiveAdmin.routes(self)

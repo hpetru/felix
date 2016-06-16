@@ -16,7 +16,6 @@ ActiveAdmin.register Student do
     :nationality_id,
     :born_at,
     :idnp_token,
-    :address_id,
     :address_house,
     :address_appartment,
     :father_last_name,
@@ -30,14 +29,39 @@ ActiveAdmin.register Student do
     :gender,
     :foreign_language_id,
     :born_at,
-    :inside_code_token
+    :inside_code_token,
+    :street_input,
+    :city_input,
+    :came_from_input
   )
 
   controller do
     def scoped_collection
       Student.includes(:student_group)
     end
+
+
+    def update(options={}, &block)
+      student = Student.find(params[:id])
+      updated_params = params[:student].except(:street_input, :city_input).permit!
+      student.update(updated_params)
+      student.city_input = params[:student][:city_input]
+      student.street_input = params[:student][:street_input]
+      student.came_from_input = params[:student][:came_from_input]
+      student.save
+      super do |success, failure|
+        block.call(success, failure) if block
+        failure.html { render :edit }
+      end
+    end
   end
+
+#  before_create do |student|
+#
+#      city = City.find_or_create_by(name: student.city_input)
+#      student.address = Address.find_or_create_by(street: student.street_input, city_id: city.id)
+#    end
+#  end
 
   menu label: 'Elevi', priority: 1
 
@@ -45,7 +69,14 @@ ActiveAdmin.register Student do
   filter :first_name
   filter :student_group, as: :select
   filter :born_at
-  filter :foreign_language
+  filter :foreign_language, as: :select, collection: [
+    Subject.find_by(
+      name: 'Limba franceză'
+    ),
+    Subject.find_by(
+      name: 'Limba germană'
+    )
+  ]
   filter :nationality, as: :select
   filter :gender, as: :select, collection: [['Băieți', 'male'], ['Fete', 'female']]
   filter :came_from, as: :select,
@@ -68,11 +99,47 @@ ActiveAdmin.register Student do
   end
 
   show title: ->(student) { "Student - #{student}" } do
-    panel 'Note' do
-      h1 'Aici va fi plasat tabelul dinamic cu note'
+    panel 'Date generale' do
+      attributes_table_for student do
+        row :first_name
+        row :last_name
+        row :gender_display
+        row :born_at
+        row :idnp_token
+        row :student_group
+        row :main_teacher
+        row :foreign_language
+        row :came_from
+        row :came_at
+        row :email
+        row :address do
+          resource.address
+        end
+        row :address_house
+        row :address_appartment
+      end
+    end
+
+    panel 'Informație mamă' do
+      attributes_table_for student do
+        row :mother_first_name
+        row :mother_last_name
+        row :mother_phone_number
+        row :mother_email
+      end
+    end
+
+    panel 'Informație tată' do
+      attributes_table_for student do
+        row :father_first_name
+        row :father_last_name
+        row :father_phone_number
+        row :father_email
+      end
     end
   end
 
+  """
   sidebar 'Date generale', only: :show do
     attributes_table_for student do
       row :first_name
@@ -83,9 +150,11 @@ ActiveAdmin.register Student do
       row :student_group
       row :main_teacher
       row :foreign_language
+      row :came_from
+      row :came_at
       row :email
       row :address do
-        resource.address.display
+        resource.address
       end
       row :address_house
       row :address_appartment
@@ -109,7 +178,7 @@ ActiveAdmin.register Student do
       row :father_email
     end
   end
-
+  """
   form do |f|
     f.inputs 'Date generale' do
       f.input :last_name
@@ -128,8 +197,8 @@ ActiveAdmin.register Student do
 
     f.inputs 'Informație clasă' do
       f.input :inside_code_token
-      f.input :came_from,
-        input_html: { class: 'select2able' }
+      f.input :came_from_input, as: :autocomplete, url: autocomplete_institution_name_institution_path,
+        input_html: { value: f.object.came_from_name }
       f.input :came_at, as: :datepicker,
         input_html: { placeholder: '2016-01-01' }
       f.input :foreign_language, # TODO: Fix this hardcode
@@ -147,7 +216,16 @@ ActiveAdmin.register Student do
     end
 
     f.inputs 'Adresa' do
-      f.input :address, input_html: { class: 'select2able' }
+      # f.input :address, input_html: { class: 'select2able' }, collection:
+      #  Address.all.map {|a| [a.street, a.street]}
+      # f.inputs for: :address do |a|
+      #  a.input :name
+      # end
+      f.input :city_input, as: :autocomplete, url: autocomplete_city_name_city_path,
+        input_html: { value: f.object.city_name }
+      f.input :street_input, as: :autocomplete, url: autocomplete_address_street_address_path,
+        input_html: { value: f.object.street_name }
+      # f.input :address, as: :autocomplete, url: autocomplete_address_display_address_path
       f.input :address_house
       f.input :address_appartment
     end
@@ -170,5 +248,29 @@ ActiveAdmin.register Student do
       f.submit 'Salvează elev'
       f.cancel_link
     end
+  end
+
+  csv do
+    column :first_name
+    column :last_name
+    column :gender_display
+    column :born_at
+    column :idnp_token
+    column :student_group
+    column :main_teacher
+    column :foreign_language
+    column :came_from
+    column :came_at
+    column :address
+    column :address_house
+    column :address_appartment
+    column :mother_first_name
+    column :mother_last_name
+    column :mother_phone_number
+    column :mother_email
+    column :father_first_name
+    column :father_last_name
+    column :father_phone_number
+    column :father_email
   end
 end

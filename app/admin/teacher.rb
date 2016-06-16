@@ -16,6 +16,7 @@ ActiveAdmin.register Teacher do
     :gender,
     :degree,
     :degree_reeval_year,
+    :graduated_from_input,
     subject_ids: []
   )
 
@@ -34,9 +35,26 @@ ActiveAdmin.register Teacher do
     ['Gradul III', 'third_degree'],
   ]
 
+  filter :subjects, as: :select
   filter :degree_reeval_year
-  filter :retired, as: :boolean
-  filter :syndicate_member, as: :boolean
+  #filter :retired, as: :boolean
+  #filter :syndicate_member, as: :boolean
+  #filter :retired, as: :select, collection: [['Oricare', ''], ['Da', 'yes'], ['Nu', 'nu']]
+  #filter :syndicate_member, as: :select, collection: [['Oricare', ''], ['Da', 'yes'], ['Nu', 'nu']]
+
+  controller do
+    def update(options={}, &block)
+      teacher = Teacher.find(params[:id])
+      updated_params = params[:teacher].except(:graduated_from_input).permit!
+      teacher.update(updated_params)
+      teacher.graduated_from_input = params[:teacher][:graduated_from_input]
+      teacher.save
+      super do |success, failure|
+        block.call(success, failure) if block
+        failure.html { render :edit }
+      end
+    end
+  end
 
   index title: 'Profesori' do
     column :last_name
@@ -110,8 +128,10 @@ ActiveAdmin.register Teacher do
         ['Gardul II', 'second_degree'],
         ['Gardul III', 'third_degree'],
       ]
-      f.input :degree_reeval_year
 
+      f.input :graduated_from_input, as: :autocomplete, url: autocomplete_institution_name_institution_path,
+        input_html: { value: f.object.graduated_from_name }
+      f.input :degree_reeval_year
       f.input :retired, as: :boolean
       f.input :syndicate_member, as: :boolean
 
@@ -120,5 +140,18 @@ ActiveAdmin.register Teacher do
         f.cancel_link
       end
     end
+  end
+
+  csv do
+    column :first_name
+    column :last_name
+    column :birthday
+    column :idnp_token
+    column :retired_display
+    column :syndicate_member_display
+    column :phone
+    column :graduated_from
+    column :degree_display
+    column :degree_reeval_year
   end
 end

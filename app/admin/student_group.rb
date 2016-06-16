@@ -8,6 +8,12 @@ ActiveAdmin.register StudentGroup do
   filter :suffix, as: :select
   filter :profile_slug, as: :select, collection: [['Real', 'real'], ['Uman', 'humanitarian']]
 
+  config.clear_action_items!
+
+  action_item only: :index do
+    link_to('Clasă nouă', new_resource_path)
+  end
+
   index title: 'Clase' do
     column :current_grade_safe, sortable: :promotion
     column :suffix
@@ -39,7 +45,7 @@ ActiveAdmin.register StudentGroup do
       f.input :promotion, as: :number
       f.input :suffix
       f.input :main_teacher, member_label: :full_name,
-              include_blank: false
+              include_blank: false, collection: Teacher.order(:last_name, :first_name)
       f.input :profile_slug, as: :select, collection: [
         ['Real', 'real'],
         ['Uman', 'humanitarian']

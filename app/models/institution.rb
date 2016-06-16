@@ -11,4 +11,9 @@ class Institution < ActiveRecord::Base
 
   has_many :students, foreign_key: :came_from_id
   has_many :teachers, foreign_key: :graduated_from_id
+
+  def display
+    name
+  end
+  alias :to_s :display
 end

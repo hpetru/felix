@@ -20,6 +20,9 @@
 
 class Teacher < ActiveRecord::Base
   NAME_REGEXP = /\A[^0-9`!@#\$%\^&*+_=]+\z/
+  before_save :generate_graduated_from
+  before_create :generate_graduated_from
+  attr_accessor   :graduated_from_input
 
   enum degree: {
     doctorate: 'doctorate',
@@ -52,6 +55,13 @@ class Teacher < ActiveRecord::Base
     presence: true
   )
 
+  validates(
+    :birthday,
+    format: {
+      with: /\d{4}\-\d{2}\-\d{2}/
+    }
+  )
+
   has_and_belongs_to_many :subjects
   has_many :teaching_subjects
   has_many :student_groups, foreign_key: :main_teacher_id, class_name: StudentGroup
@@ -74,5 +84,27 @@ class Teacher < ActiveRecord::Base
     )
   end
 
+  def graduated_from_name
+    return graduated_from_input if !graduated_from_input.nil?
+    graduated_from.nil? ? nil : graduated_from.name
+  end
+
+  def retired_display
+    retired ? 'Da' : 'Nu'
+  end
+
+  def syndicate_member_display
+    syndicate_member ? 'Da' : 'Nu'
+  end
+
   alias :to_s :full_name
+  def generate_graduated_from
+    return if graduated_from_input.nil?
+    if !graduated_from_input.empty?
+      inst = Institution.find_or_create_by(name: graduated_from_input)
+      self.graduated_from = inst
+    else
+      self.graduated_from = nil
+    end
+  end
 end

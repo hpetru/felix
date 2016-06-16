@@ -19,6 +19,12 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 ro:
+  support:
+    array:
+      last_word_connector: ", și "
+      two_words_connector: " și "
+      words_connector: ", "
+
   activerecord:
     errors:
       models:
@@ -34,14 +40,42 @@ ro:
               too_short: 'Prenumele trebuie să conțină cel puțin 3 caractere'
               too_long: 'Prenumele nu trebuie să conțină mai mult de 20 caractere'
               invalid: 'Prenumele poate conține doar litere'
+            mother_last_name:
+              blank: 'Numele este obligatoriu'
+              too_short: 'Numele trebuie să conțină cel puțin 3 caractere'
+              too_long: 'Numele nu trebuie să conțină mai mult de 20 caractere'
+              invalid: 'Numele poate conține doar litere'
+            mother_first_name:
+              blank: 'Prenumele este obligatoriu'
+              too_short: 'Prenumele trebuie să conțină cel puțin 3 caractere'
+              too_long: 'Prenumele nu trebuie să conțină mai mult de 20 caractere'
+              invalid: 'Prenumele poate conține doar litere'
+            father_last_name:
+              blank: 'Numele este obligatoriu'
+              too_short: 'Numele trebuie să conțină cel puțin 3 caractere'
+              too_long: 'Numele nu trebuie să conțină mai mult de 20 caractere'
+              invalid: 'Numele poate conține doar litere'
+            father_first_name:
+              blank: 'Prenumele este obligatoriu'
+              too_short: 'Prenumele trebuie să conțină cel puțin 3 caractere'
+              too_long: 'Prenumele nu trebuie să conțină mai mult de 20 caractere'
+              invalid: 'Prenumele poate conține doar litere'
             born_at:
               blank: 'Data nașterii este obligatorie'
+              invalid: 'Data nașterii are formatul 2005-04-31'
             inside_code_token:
               blank: 'Codul intern este obligatoriu'
               invalid: 'Codul intern are formatul A-0000'
+              too_short: 'Codul intern are lungimea 7'
             idnp_token:
               invalid: 'IDNP poate conține doar cifre'
               too_short: 'Lungimea este egală cu 13'
+            mother_phone_number:
+              invalid: 'Numărul de telefon conține doar cifre'
+              too_short: 'Lungimea minimă este egală cu 9'
+            father_phone_number:
+              invalid: 'Numărul de telefon conține doar cifre'
+              too_short: 'Lungimea minimă este egală cu 9'
         student_group:
           attributes:
             suffix:
@@ -62,6 +96,7 @@ ro:
               invalid: 'Prenumele poate conține doar litere'
             birthday:
               blank: 'Data nașterii este obligatorie'
+              invalid: 'Data nașterii are formatul 2005-04-31'
     models:
       student:
         one:
@@ -92,11 +127,14 @@ ro:
         main_teacher: 'Dirigintele'
         nationality: 'Naționalitatea'
         address: 'Adresa'
+        street_input: 'Strada'
+        city_input: 'Oraș'
         address_house: 'Casa'
         address_appartment: 'Apartamentul'
         foreign_language: 'Limba străină'
         came_at: 'Data venirii'
         came_from: 'Venit din'
+        came_from_input: 'Venit din'
         semester_grades: 'Note semestriale'
         annual_grades: 'Note anuale'
         thesis_grades: 'Teze'
@@ -138,7 +176,9 @@ ro:
         subject_ids: 'Materii'
         birthday: 'Data nașterii'
         retired: 'Pensionar'
+        retired_display: 'Pensionar'
         syndicate_member: 'Membru de sindicat'
+        syndicate_member_display: 'Membru de sindicat'
         phone: 'Telefon'
         idnp_token: 'IDNP'
         graduated_from: 'Instituția absolvită'
@@ -205,8 +245,8 @@ ro:
         greater_than: 'Mai mare ca'
         less_than: 'Mai mic ca'
     status_tag:
-      yes: 'Da'
-      no: 'Nu'
+      "yes": 'Da'
+      "no": 'Nu'
     search_status:
       headline: 'Starea căutării:'
       current_scope: 'Domeniul:'

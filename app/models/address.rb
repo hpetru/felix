@@ -22,4 +22,6 @@ class Address < ActiveRecord::Base
   def display
     "#{city.name} - str. #{street}"
   end
+
+  alias :to_s :display
 end
