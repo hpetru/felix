@@ -182,6 +182,7 @@ ro:
         phone: 'Telefon'
         idnp_token: 'IDNP'
         graduated_from: 'Instituția absolvită'
+        graduated_from_input: 'Instituția absolvită'
         degree: 'Gradul didactic'
         degree_display: 'Gradul didactic'
         degree_reeval_year: 'Anul confirmării gradului'

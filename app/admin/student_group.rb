@@ -65,4 +65,13 @@ ActiveAdmin.register StudentGroup do
       end
     end
   end
+
+  csv do
+    column :current_grade_safe
+    column :suffix
+    column :promotion
+    column :main_teacher
+    column :profile_display
+    column :students_count
+  end
 end
